@@ -33,8 +33,15 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     var headerTitle: String = "Favorites" //Default
     let headerHeight: CGFloat = 45
     
+    let detailSegue: String = "showDetails" //Session Details
+    
+    var viewModel: SessionsViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = SessionsViewModel(rest: restController)
+        viewModel.loadSessionsForDay(day: .Favorites)
+        
         styleBtns()
         selectedDay(day: Day.Favorites)
         self.scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
@@ -49,8 +56,8 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         style()
     }
     
@@ -61,16 +68,26 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func style()
     {
+        self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.tintColor = UIColor.cmTeal()
         self.headerView.backgroundColor = UIColor.cmTeal()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == detailSegue {
+            let detail = segue.destination as? SessionDetailsViewController
+        }
+    }
+    
+    //TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "sessionsCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sessionsCell") as? SessionTableViewCell
+        
         return cell!
     }
     
@@ -85,6 +102,10 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         label.textColor = UIColor.white
         view.addSubview(label)
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: detailSegue, sender: self)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

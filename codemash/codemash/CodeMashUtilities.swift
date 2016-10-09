@@ -28,6 +28,10 @@ extension UIColor {
     public static func cmLime() -> UIColor {
         return hexStringToUIColor(hex: "#b6dd5e")
     }
+    
+    public static func cmGrey() -> UIColor {
+        return hexStringToUIColor(hex: "#eaeaea")
+    }
 }
 
 func hexStringToUIColor (hex:String) -> UIColor {
