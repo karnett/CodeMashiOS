@@ -69,6 +69,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     func style()
     {
         self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.title = "Sessions"
         self.tabBarController?.tabBar.tintColor = UIColor.cmTeal()
         self.headerView.backgroundColor = UIColor.cmTeal()
     }

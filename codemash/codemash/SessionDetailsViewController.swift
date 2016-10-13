@@ -27,6 +27,13 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 70.0
+        
+        
+        self.edgesForExtendedLayout = .all
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

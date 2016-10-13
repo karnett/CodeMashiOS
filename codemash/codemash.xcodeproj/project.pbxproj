@@ -17,6 +17,7 @@
 		BA8D4D241DA93953007CBE84 /* SessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D231DA93953007CBE84 /* SessionsViewModel.swift */; };
 		BA8D4D261DA939FC007CBE84 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D251DA939FC007CBE84 /* Session.swift */; };
 		BAAE658C1DA93EC600DF116C /* SpeakerThin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE658B1DA93EC600DF116C /* SpeakerThin.swift */; };
+		BAAE658E1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE658D1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift */; };
 		BAC338C71D8F0BAC00D368BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338C61D8F0BAC00D368BF /* AppDelegate.swift */; };
 		BAC338C91D8F0BAC00D368BF /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338C81D8F0BAC00D368BF /* SessionsViewController.swift */; };
 		BAC338CC1D8F0BAC00D368BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC338CA1D8F0BAC00D368BF /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		BA8D4D231DA93953007CBE84 /* SessionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsViewModel.swift; sourceTree = "<group>"; };
 		BA8D4D251DA939FC007CBE84 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		BAAE658B1DA93EC600DF116C /* SpeakerThin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerThin.swift; sourceTree = "<group>"; };
+		BAAE658D1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailsViewController.swift; sourceTree = "<group>"; };
 		BAC338C31D8F0BAC00D368BF /* codemash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codemash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAC338C61D8F0BAC00D368BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAC338C81D8F0BAC00D368BF /* SessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				BA8D4D1D1DA9295A007CBE84 /* SessionDetailsViewController.swift */,
 				BA8D4D151DA13E89007CBE84 /* MapViewController.swift */,
 				BA8D4D171DA13E92007CBE84 /* SpeakersVeiwController.swift */,
+				BAAE658D1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift */,
 				BA8D4D191DA13EA4007CBE84 /* AboutViewController.swift */,
 			);
 			name = ViewControllers;
@@ -414,6 +417,7 @@
 				BA8D4D241DA93953007CBE84 /* SessionsViewModel.swift in Sources */,
 				BA8D4D181DA13E92007CBE84 /* SpeakersVeiwController.swift in Sources */,
 				BA8D4D1C1DA14442007CBE84 /* CodeMashUtilities.swift in Sources */,
+				BAAE658E1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift in Sources */,
 				BA8D4D141DA13BA7007CBE84 /* RestController.swift in Sources */,
 				BA8D4D261DA939FC007CBE84 /* Session.swift in Sources */,
 				BAC338C71D8F0BAC00D368BF /* AppDelegate.swift in Sources */,
