@@ -8,11 +8,17 @@
 
 import UIKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UIScrollViewDelegate {
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var imageView: UIImageView!
     
     var restController = RestController()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.scrollView.contentSize = self.imageView.frame.size
+        self.scrollView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -30,8 +36,18 @@ class MapViewController: UIViewController {
     
     func style()
     {
+        self.scrollView.zoomScale = 1.0
         self.tabBarController?.tabBar.tintColor = UIColor.cmOrange()
         self.tabBarController?.tabBar.setNeedsDisplay()
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+       
+        return self.imageView
+    }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+       // <#code#>
     }
     
 }

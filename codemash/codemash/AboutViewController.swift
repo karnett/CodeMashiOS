@@ -9,10 +9,14 @@
 import UIKit
 
 class AboutViewController: UIViewController {
+    @IBOutlet weak var headerView: UIView!
     
     var restController = RestController()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.headerView.backgroundColor = UIColor.cmLime()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
