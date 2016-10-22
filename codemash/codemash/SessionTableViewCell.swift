@@ -11,10 +11,11 @@ import UIKit
 
 class SessionTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UITextView!
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var favoriteImgView: UIImageView!
     
     @IBOutlet weak var timeLabel: UILabel!
+    
 }

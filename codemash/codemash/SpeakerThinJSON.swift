@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class SpeakerThin: Mappable
+class SpeakerThinJSON: Mappable
 {
     internal var speakerId: String!
     internal var firstName: String?

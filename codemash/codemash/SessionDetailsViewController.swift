@@ -17,7 +17,7 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
     //Buttons
-    let session: Session? = nil
+    let session: SessionJSON? = nil
     let headerHeight: CGFloat = 45
     
     override func viewDidLoad() {

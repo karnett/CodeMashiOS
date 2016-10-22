@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA14ED041DB2DEC300A6532C /* SpeakerJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA14ED031DB2DEC300A6532C /* SpeakerJSON.swift */; };
+		BA14ED061DB2E37F00A6532C /* SpeakersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA14ED051DB2E37F00A6532C /* SpeakersViewModel.swift */; };
+		BA14ED081DB2E54200A6532C /* SpeakerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA14ED071DB2E54200A6532C /* SpeakerTableViewCell.swift */; };
+		BA1D3E221DB429EA001D2533 /* codemash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA1D3E201DB429EA001D2533 /* codemash.xcdatamodeld */; };
+		BA1D3E2A1DB84032001D2533 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D3E291DB84032001D2533 /* CoreDataController.swift */; };
+		BA1D3E2D1DB8610A001D2533 /* SpeakerObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D3E2B1DB8610A001D2533 /* SpeakerObj.swift */; };
+		BA1D3E2E1DB8610A001D2533 /* SessionObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D3E2C1DB8610A001D2533 /* SessionObj.swift */; };
+		BA61A0C81DBBCFB300E8FBB8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61A0C71DBBCFB300E8FBB8 /* NotificationName.swift */; };
 		BA8D4D141DA13BA7007CBE84 /* RestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D131DA13BA7007CBE84 /* RestController.swift */; };
 		BA8D4D161DA13E89007CBE84 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D151DA13E89007CBE84 /* MapViewController.swift */; };
 		BA8D4D181DA13E92007CBE84 /* SpeakersVeiwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D171DA13E92007CBE84 /* SpeakersVeiwController.swift */; };
@@ -15,8 +23,8 @@
 		BA8D4D1E1DA9295A007CBE84 /* SessionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D1D1DA9295A007CBE84 /* SessionDetailsViewController.swift */; };
 		BA8D4D211DA93440007CBE84 /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D201DA93440007CBE84 /* SessionTableViewCell.swift */; };
 		BA8D4D241DA93953007CBE84 /* SessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D231DA93953007CBE84 /* SessionsViewModel.swift */; };
-		BA8D4D261DA939FC007CBE84 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D251DA939FC007CBE84 /* Session.swift */; };
-		BAAE658C1DA93EC600DF116C /* SpeakerThin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE658B1DA93EC600DF116C /* SpeakerThin.swift */; };
+		BA8D4D261DA939FC007CBE84 /* SessionJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D251DA939FC007CBE84 /* SessionJSON.swift */; };
+		BAAE658C1DA93EC600DF116C /* SpeakerThinJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE658B1DA93EC600DF116C /* SpeakerThinJSON.swift */; };
 		BAAE658E1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE658D1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift */; };
 		BAC338C71D8F0BAC00D368BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338C61D8F0BAC00D368BF /* AppDelegate.swift */; };
 		BAC338C91D8F0BAC00D368BF /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338C81D8F0BAC00D368BF /* SessionsViewController.swift */; };
@@ -49,6 +57,14 @@
 		21114127FD5248D8210A36B7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		534FED16929A620C5155F85F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A775F0E0BE5E514B7A81D4EB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA14ED031DB2DEC300A6532C /* SpeakerJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerJSON.swift; sourceTree = "<group>"; };
+		BA14ED051DB2E37F00A6532C /* SpeakersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewModel.swift; sourceTree = "<group>"; };
+		BA14ED071DB2E54200A6532C /* SpeakerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerTableViewCell.swift; sourceTree = "<group>"; };
+		BA1D3E211DB429EA001D2533 /* codemash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = codemash.xcdatamodel; sourceTree = "<group>"; };
+		BA1D3E291DB84032001D2533 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		BA1D3E2B1DB8610A001D2533 /* SpeakerObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerObj.swift; sourceTree = "<group>"; };
+		BA1D3E2C1DB8610A001D2533 /* SessionObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionObj.swift; sourceTree = "<group>"; };
+		BA61A0C71DBBCFB300E8FBB8 /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		BA8D4D131DA13BA7007CBE84 /* RestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestController.swift; sourceTree = "<group>"; };
 		BA8D4D151DA13E89007CBE84 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		BA8D4D171DA13E92007CBE84 /* SpeakersVeiwController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersVeiwController.swift; sourceTree = "<group>"; };
@@ -57,8 +73,8 @@
 		BA8D4D1D1DA9295A007CBE84 /* SessionDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDetailsViewController.swift; sourceTree = "<group>"; };
 		BA8D4D201DA93440007CBE84 /* SessionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
 		BA8D4D231DA93953007CBE84 /* SessionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsViewModel.swift; sourceTree = "<group>"; };
-		BA8D4D251DA939FC007CBE84 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		BAAE658B1DA93EC600DF116C /* SpeakerThin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerThin.swift; sourceTree = "<group>"; };
+		BA8D4D251DA939FC007CBE84 /* SessionJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionJSON.swift; sourceTree = "<group>"; };
+		BAAE658B1DA93EC600DF116C /* SpeakerThinJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerThinJSON.swift; sourceTree = "<group>"; };
 		BAAE658D1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailsViewController.swift; sourceTree = "<group>"; };
 		BAC338C31D8F0BAC00D368BF /* codemash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codemash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAC338C61D8F0BAC00D368BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +125,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BA1D3E1C1DB429AA001D2533 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BA1D3E2B1DB8610A001D2533 /* SpeakerObj.swift */,
+				BA1D3E2C1DB8610A001D2533 /* SessionObj.swift */,
+				BA1D3E201DB429EA001D2533 /* codemash.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		BA8D4D101DA13B24007CBE84 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,8 +151,11 @@
 		BA8D4D111DA13B78007CBE84 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				BA1D3E1C1DB429AA001D2533 /* CoreData */,
 				BA8D4D121DA13B91007CBE84 /* JSONModels */,
 				BA8D4D131DA13BA7007CBE84 /* RestController.swift */,
+				BA1D3E291DB84032001D2533 /* CoreDataController.swift */,
+				BA61A0C71DBBCFB300E8FBB8 /* NotificationName.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -134,8 +163,9 @@
 		BA8D4D121DA13B91007CBE84 /* JSONModels */ = {
 			isa = PBXGroup;
 			children = (
-				BA8D4D251DA939FC007CBE84 /* Session.swift */,
-				BAAE658B1DA93EC600DF116C /* SpeakerThin.swift */,
+				BA8D4D251DA939FC007CBE84 /* SessionJSON.swift */,
+				BAAE658B1DA93EC600DF116C /* SpeakerThinJSON.swift */,
+				BA14ED031DB2DEC300A6532C /* SpeakerJSON.swift */,
 			);
 			name = JSONModels;
 			sourceTree = "<group>";
@@ -144,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8D4D201DA93440007CBE84 /* SessionTableViewCell.swift */,
+				BA14ED071DB2E54200A6532C /* SpeakerTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -152,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8D4D231DA93953007CBE84 /* SessionsViewModel.swift */,
+				BA14ED051DB2E37F00A6532C /* SpeakersViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -412,16 +444,24 @@
 			files = (
 				BA8D4D211DA93440007CBE84 /* SessionTableViewCell.swift in Sources */,
 				BA8D4D1A1DA13EA4007CBE84 /* AboutViewController.swift in Sources */,
-				BAAE658C1DA93EC600DF116C /* SpeakerThin.swift in Sources */,
+				BA1D3E2A1DB84032001D2533 /* CoreDataController.swift in Sources */,
+				BAAE658C1DA93EC600DF116C /* SpeakerThinJSON.swift in Sources */,
+				BA14ED081DB2E54200A6532C /* SpeakerTableViewCell.swift in Sources */,
+				BA1D3E2D1DB8610A001D2533 /* SpeakerObj.swift in Sources */,
 				BAC338C91D8F0BAC00D368BF /* SessionsViewController.swift in Sources */,
 				BA8D4D241DA93953007CBE84 /* SessionsViewModel.swift in Sources */,
 				BA8D4D181DA13E92007CBE84 /* SpeakersVeiwController.swift in Sources */,
 				BA8D4D1C1DA14442007CBE84 /* CodeMashUtilities.swift in Sources */,
+				BA61A0C81DBBCFB300E8FBB8 /* NotificationName.swift in Sources */,
 				BAAE658E1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift in Sources */,
 				BA8D4D141DA13BA7007CBE84 /* RestController.swift in Sources */,
-				BA8D4D261DA939FC007CBE84 /* Session.swift in Sources */,
+				BA8D4D261DA939FC007CBE84 /* SessionJSON.swift in Sources */,
 				BAC338C71D8F0BAC00D368BF /* AppDelegate.swift in Sources */,
+				BA1D3E2E1DB8610A001D2533 /* SessionObj.swift in Sources */,
+				BA14ED041DB2DEC300A6532C /* SpeakerJSON.swift in Sources */,
+				BA14ED061DB2E37F00A6532C /* SpeakersViewModel.swift in Sources */,
 				BA8D4D1E1DA9295A007CBE84 /* SessionDetailsViewController.swift in Sources */,
+				BA1D3E221DB429EA001D2533 /* codemash.xcdatamodeld in Sources */,
 				BA8D4D161DA13E89007CBE84 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +736,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BA1D3E201DB429EA001D2533 /* codemash.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BA1D3E211DB429EA001D2533 /* codemash.xcdatamodel */,
+			);
+			currentVersion = BA1D3E211DB429EA001D2533 /* codemash.xcdatamodel */;
+			path = codemash.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BAC338BB1D8F0BAC00D368BF /* Project object */;
 }

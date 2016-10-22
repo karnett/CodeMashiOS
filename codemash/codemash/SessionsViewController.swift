@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum Day: Int {
     case Favorites = 0, Tuesday, Wednesday, Thursday, Friday
@@ -29,6 +30,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var stackView: UIStackView!
     
     var restController = RestController()
+    var coreDataController = CoreDataController()
     
     var headerTitle: String = "Favorites" //Default
     let headerHeight: CGFloat = 45
@@ -39,7 +41,9 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = SessionsViewModel(rest: restController)
+        
+        
+        viewModel = SessionsViewModel(rest: restController, coreData: coreDataController)
         viewModel.loadSessionsForDay(day: .Favorites)
         
         styleBtns()
@@ -54,16 +58,32 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.tableView.estimatedRowHeight = 70.0
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         style()
+        
+        // Register to receive notification
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionsLoaded), name: NotificationName.sessionsLoaded, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // Stop listening notification
+        NotificationCenter.default.removeObserver(self, name: NotificationName.sessionsLoaded, object: nil);
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func sessionsLoaded() {
+        self.tableView.reloadData()
     }
     
     func style()
@@ -83,12 +103,18 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     //TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sessionsCell") as? SessionTableViewCell
-        
+        let session = viewModel.getSessionAtIndex(row: indexPath.row)
+        if session != nil {
+            cell?.titleLabel.text = session!.title ?? ""
+            cell?.titleLabel.sizeToFit()
+            //cell?.roomLabel = session?.rooms[0] ?? ""
+            cell?.timeLabel.text = "" ?? "TBD"
+        }
         return cell!
     }
     
@@ -111,6 +137,10 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return self.headerHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         return UITableViewAutomaticDimension
     }
     
     @IBAction func daySelected(_ sender: UIButton) {

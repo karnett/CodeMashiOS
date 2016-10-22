@@ -9,11 +9,12 @@
 import Foundation
 import ObjectMapper
 
-class Session: Mappable
+
+class SessionJSON: Mappable
 {
     internal var sessionId: Int!
-    internal var startTime: NSDate?
-    internal var endTime: NSDate?
+    internal var startTime: String? //2015-01-08T08:00:00
+    internal var endTime: String?
     internal var rooms: [String]?
     
     internal var title: String?
@@ -22,8 +23,8 @@ class Session: Mappable
     
     
     internal var tags: [String]?
-    internal var category: Category?
-    internal var speakers: [SpeakerThin]?
+    internal var category: String?
+    internal var speakers: [SpeakerThinJSON]?
     
     required init?(map: Map) {
         mapping(map: map)
