@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AlamofireImage
 
 class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -36,14 +37,21 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     let headerHeight: CGFloat = 45
     
+    let webSegue = "showWeb"
+    var speaker: SpeakerObj?
+    var sessions: [SessionObj] = []
     
-    
+    var selectedURL = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.estimatedRowHeight = 70.0
+        
+        if speaker != nil {
+            loadSpeakerView()
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -89,6 +97,34 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
+    func loadSpeakerView() {
+        let url = "https:"+(self.speaker?.gravatarUrl ?? "")
+        self.profileImage.af_setImage(withURL: URL(string: url)!)
+        self.backgroundImage.af_setImage(withURL: URL(string: url)!)
+        self.nameLabel.text = (speaker?.firstName)!+" "+(speaker?.lastName)!
+        
+        if speaker?.blogUrl == nil || speaker?.blogUrl == "" {
+            self.blogBtn.isEnabled = false
+            self.blogBtn.tintColor = UIColor.lightGray
+        }
+        
+        if speaker?.twitterUrl == nil || speaker?.twitterUrl == "" {
+            self.twitterBtn.isEnabled = false
+            self.twitterBtn.tintColor = UIColor.lightGray
+        }
+        
+        if speaker?.linkedInUrl == nil || speaker?.linkedInUrl == "" {
+            self.linkedinBtn.isEnabled = false
+            self.linkedinBtn.tintColor = UIColor.lightGray
+        }
+        
+        if speaker?.githubUrl == nil || speaker?.githubUrl == "" {
+            self.githubBtn.isEnabled = false
+            self.githubBtn.tintColor = UIColor.lightGray
+        }
+        
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -97,18 +133,19 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if section == 0 {
             return 1
         }
-        return 10
+        return sessions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "bioCell")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "bioCell") as? BiographyTableViewCell
             
+            cell?.textView.text = speaker?.biography ?? "Unavailable."
             return cell!
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "sessionsCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sessionsCell") as? SessionTableViewCell
         
         return cell!
     }
@@ -150,8 +187,30 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func linkBtnPressed(_ sender: AnyObject) {
         
         print(sender.tag)
+        switch (sender.tag) {
+            case 0:
+                self.selectedURL = speaker?.githubUrl ?? ""
+            case 1:
+                self.selectedURL = speaker?.twitterUrl ?? ""
+            
+            case 2:
+                self.selectedURL = speaker?.linkedInUrl ?? ""
+            case 3:
+                self.selectedURL = speaker?.blogUrl ?? ""
+            default:
+                self.selectedURL = ""
+        }
+        
+        if self.selectedURL != "" {
+            self.performSegue(withIdentifier: webSegue, sender: self)
+        }
     }
     
-    
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == webSegue {
+            let dest = segue.destination as? SpeakerWebViewController
+            dest?.urlString = selectedURL
+            
+        }
+    }
 }

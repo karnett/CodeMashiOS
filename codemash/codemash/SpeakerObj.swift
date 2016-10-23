@@ -13,7 +13,14 @@ class SpeakerObj: NSManagedObject {
     @nonobjc public class func fetchRequest(model: NSManagedObjectModel) -> NSFetchRequest<SpeakerObj> {
         return model.fetchRequestTemplate(forName: "GetSpeakers")! as! NSFetchRequest<SpeakerObj>
     }
-    @NSManaged var speakerId: NSNumber?
+    
+    @nonobjc public class func getSpeakerWithId(model: NSManagedObjectModel, id: String) -> NSFetchRequest<SpeakerObj> {
+        let fetchRequest = NSFetchRequest<SpeakerObj>(entityName: "SpeakerModel")
+        fetchRequest.predicate = NSPredicate(format: "speakerId == %@", id)
+        return fetchRequest
+    }
+    
+    @NSManaged var speakerId: String?
     @NSManaged var biography: String? //2015-01-08T08:00:00
     @NSManaged var firstName: String?
     @NSManaged var lastName: String?
@@ -21,6 +28,7 @@ class SpeakerObj: NSManagedObject {
     @NSManaged var gravatarUrl: String?
     @NSManaged var linkedInUrl: String?
     
+    @NSManaged var githubUrl: String?
     @NSManaged var blogUrl: String?
     @NSManaged var twitterUrl: String?
     

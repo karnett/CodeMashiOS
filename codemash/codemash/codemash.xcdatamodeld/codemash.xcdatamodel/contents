@@ -12,20 +12,21 @@
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="SpeakerModel" representedClassName="codemashSpeakerObj" syncable="YES">
+    <entity name="SpeakerModel" representedClassName=".SpeakerObj" syncable="YES">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="blogUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="githubUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gravatarUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="linkedInUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="speakerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="speakerId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitterUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <fetchRequest name="GetSessions" entity="SessionModel" predicateString="sessionId != 0"/>
     <fetchRequest name="GetSpeakers" entity="SpeakerModel" predicateString="speakerId != 0"/>
     <elements>
         <element name="SessionModel" positionX="-18" positionY="27" width="128" height="195"/>
-        <element name="SpeakerModel" positionX="-45" positionY="0" width="128" height="165"/>
+        <element name="SpeakerModel" positionX="-45" positionY="0" width="128" height="180"/>
     </elements>
 </model>

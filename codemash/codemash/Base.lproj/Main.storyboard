@@ -59,11 +59,11 @@
                                 <frame key="frameInset" minY="200" width="375" height="418"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="speakersCell" id="xE8-jo-jVn" customClass="SpeakerTableViewCell" customModule="codemash" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="speakersCell" id="xE8-jo-jVn" customClass="SpeakerTableViewCell" customModule="codemash" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xE8-jo-jVn" id="CZQ-Uk-b9Y">
-                                            <frame key="frameInset" width="342" height="69.5"/>
+                                            <frame key="frameInset" width="342" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O92-lq-kRL">
@@ -249,11 +249,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rb6-Tt-MJW">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bioCell" rowHeight="70" id="I59-E9-4XI" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bioCell" rowHeight="70" id="I59-E9-4XI" customClass="BiographyTableViewCell" customModule="codemash" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I59-E9-4XI" id="H6p-YY-Fdz">
-                                            <frame key="frameInset" width="375" height="69.5"/>
+                                            <frame key="frameInset" width="375" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="klt-4Z-zOD">
@@ -270,12 +270,15 @@
                                                 <constraint firstItem="klt-4Z-zOD" firstAttribute="top" secondItem="H6p-YY-Fdz" secondAttribute="top" id="t99-Ia-PBP"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textView" destination="klt-4Z-zOD" id="2If-tK-wbl"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sessionsCell" id="RFd-vV-i4L" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="98" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RFd-vV-i4L" id="hdE-3x-5Pw">
-                                            <frame key="frameInset" width="375" height="69.5"/>
+                                            <frame key="frameInset" width="375" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="s8b-ea-fIj">
@@ -358,11 +361,48 @@
                         <outlet property="profileImage" destination="HiV-Mw-eGZ" id="fvB-Zk-Tjk"/>
                         <outlet property="tableView" destination="rb6-Tt-MJW" id="uo7-Ax-ivc"/>
                         <outlet property="twitterBtn" destination="4Bz-1Z-Gdc" id="ad4-7J-JRd"/>
+                        <segue destination="DuD-db-Oqu" kind="show" identifier="showWeb" id="tck-81-oiA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ja0-zG-tbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1632.8" y="285.60719640179911"/>
+        </scene>
+        <!--Speaker Web View Controller-->
+        <scene sceneID="DUw-3G-zem">
+            <objects>
+                <viewController id="DuD-db-Oqu" customClass="SpeakerWebViewController" customModule="codemash" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="39h-EZ-5Nv"/>
+                        <viewControllerLayoutGuide type="bottom" id="nfK-S9-vYX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A3k-0w-TWr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szH-sx-ZuJ">
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2Bg-bQ-zBH"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="szH-sx-ZuJ" firstAttribute="leading" secondItem="A3k-0w-TWr" secondAttribute="leading" id="1Q5-Up-SJK"/>
+                            <constraint firstAttribute="bottom" secondItem="szH-sx-ZuJ" secondAttribute="bottom" id="Jsy-L0-qPA"/>
+                            <constraint firstItem="2Bg-bQ-zBH" firstAttribute="centerX" secondItem="A3k-0w-TWr" secondAttribute="centerX" id="QAc-jd-GZ4"/>
+                            <constraint firstAttribute="trailing" secondItem="szH-sx-ZuJ" secondAttribute="trailing" id="Sgr-hM-rZy"/>
+                            <constraint firstItem="2Bg-bQ-zBH" firstAttribute="centerY" secondItem="A3k-0w-TWr" secondAttribute="centerY" id="TNL-oY-ywR"/>
+                            <constraint firstItem="szH-sx-ZuJ" firstAttribute="top" secondItem="A3k-0w-TWr" secondAttribute="top" id="aKc-3a-jAI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="2Bg-bQ-zBH" id="gAR-m1-ham"/>
+                        <outlet property="webView" destination="szH-sx-ZuJ" id="SJf-FV-07u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XK6-R0-Xvb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2357.5999999999999" y="285.60719640179911"/>
         </scene>
         <!--Map-->
         <scene sceneID="4oh-dx-Z6R">
@@ -589,11 +629,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bne-gb-x0X">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="sessionsCell" id="wM1-0s-L9L" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="sessionsCell" id="wM1-0s-L9L" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wM1-0s-L9L" id="330-dE-aCi">
-                                            <frame key="frameInset" width="342" height="69.5"/>
+                                            <frame key="frameInset" width="342" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbE-Xy-38C">
@@ -740,11 +780,11 @@ really loooonng long title.</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1wx-Ce-mxJ">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="speakersCell" id="X3n-OL-BEg" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="speakersCell" id="X3n-OL-BEg" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X3n-OL-BEg" id="dcQ-0R-02B">
-                                            <frame key="frameInset" width="342" height="69.5"/>
+                                            <frame key="frameInset" width="342" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LD0-Qo-a4Y">
@@ -778,11 +818,11 @@ really loooonng long title.</string>
                                             <outlet property="titleLabel" destination="FYM-nC-Bwl" id="BUw-NX-1vE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="abstractCell" rowHeight="70" id="PlO-Mr-qGG" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="abstractCell" rowHeight="70" id="PlO-Mr-qGG" customClass="SessionTableViewCell" customModule="codemash" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="98" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PlO-Mr-qGG" id="apQ-fc-fFq">
-                                            <frame key="frameInset" width="375" height="69.5"/>
+                                            <frame key="frameInset" width="375" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yl1-Ik-2ir">

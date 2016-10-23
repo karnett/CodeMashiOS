@@ -9,18 +9,50 @@
 import Foundation
 
 class SpeakersViewModel {
-    var rest: RestController?
+    var rest: RestController!
+    var coreData: CoreDataController!
     
-    var speakers: [SpeakerJSON] = []
-    var filtered: [SpeakerJSON] = []
+    var speakers: [SpeakerObj] = []
+    var filtered: [SpeakerObj] = []
     
     var isFiltering = false
-    init(rest: RestController) {
+
+    init(rest: RestController, coreData: CoreDataController) {
         self.rest = rest
+        self.coreData = coreData
     }
     
     func loadSpeakers() {
+        self.speakers = self.coreData.getSpeakers()
         
+        if speakers.count == 0 {
+            requestSpeakers()
+        }
+    }
+    
+    func requestSpeakers() {
+        //move to core data
+        self.rest.loadSpeakers(completionHandler: { result in
+            
+            switch result {
+                
+            case .success(let data):
+                
+                for entry in data {
+                    self.coreData.saveSpeaker(json: entry)
+                }
+                
+                self.speakers = self.coreData.getSpeakers()
+                
+                //send notification to reload table
+                NotificationCenter.default.post(name: NotificationName.speakersLoaded, object: nil)
+
+            case .failure(let error):
+                //alert
+                print(error)
+            }
+            
+        })
     }
     
     func numberOfRowsInSection(section: Int) -> Int {
@@ -32,7 +64,7 @@ class SpeakersViewModel {
         return speakers.count
     }
     
-    func getSpeakerAtIndex(row: Int) -> SpeakerJSON? {
+    func getSpeakerAtIndex(row: Int) -> SpeakerObj? {
         if isFiltering && row < filtered.count {
             return filtered[row]
             
@@ -41,6 +73,10 @@ class SpeakersViewModel {
             return speakers[row]
         }
         return nil
+    }
+    
+    func getSessionsForSpeaker(id: String) {
+        
     }
     
     func filterSpeakers(text: String)

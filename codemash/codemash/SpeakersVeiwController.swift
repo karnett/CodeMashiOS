@@ -17,18 +17,25 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var restController = RestController()
+    var coreDataController = CoreDataController()
+    
     let detailSegue: String = "showDetails" //Speaker Details
     let headerHeight: CGFloat = 200.0
     
     var viewModel: SpeakersViewModel!
+    var selectedIndex: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel = SpeakersViewModel(rest: restController, coreData: coreDataController)
+        
+        
+        self.viewModel.loadSpeakers()
         self.navigationController?.navigationBar.isHidden = true
         
         self.headerView.backgroundColor = UIColor.cmBlue()
-        viewModel = SpeakersViewModel(rest: restController)
+        viewModel = SpeakersViewModel(rest: restController, coreData: coreDataController)
         viewModel.loadSpeakers()
        
         
@@ -45,20 +52,7 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
         
-        //move to core data
-        restController.loadSpeakers(completionHandler: { result in
-            
-            switch result {
-                
-                case .success(let data):
-                    self.viewModel.speakers = data
-                    self.tableView.reloadData()
-                case .failure(let error):
-                    //alert
-                    print(error)
-            }
-            
-        })
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,8 +64,15 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = true
+        
+        // Register to receive notification
+        NotificationCenter.default.addObserver(self, selector: #selector(speakersLoaded), name: NotificationName.speakersLoaded, object: nil)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // Stop listening notification
+        NotificationCenter.default.removeObserver(self, name: NotificationName.speakersLoaded, object: nil);
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -84,6 +85,10 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tabBarController?.tabBar.tintColor = UIColor.cmBlue()
         self.navigationController?.navigationBar.tintColor = UIColor.cmBlue()
         self.navigationItem.title = "Speakers"
+    }
+    
+    func speakersLoaded() {
+        self.tableView.reloadData()
     }
     
     
@@ -109,7 +114,18 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedIndex = indexPath
         self.performSegue(withIdentifier: detailSegue, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == detailSegue {
+            
+            let detail = segue.destination as? SpeakerDetailsViewController
+            let speaker = self.viewModel.getSpeakerAtIndex(row: self.selectedIndex!.row)
+            detail?.speaker = speaker
+            
+        }
     }
     
 }

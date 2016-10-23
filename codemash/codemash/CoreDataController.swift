@@ -21,7 +21,7 @@ class CoreDataController {
             let results = try context.fetch(request) //(request) //as? [NSManagedObject]
             return results
         } catch{
-            fatalError("Error is retriving Gorcery items")
+            fatalError("Error is retriving Session items")
         }
         
         return []
@@ -36,10 +36,27 @@ class CoreDataController {
             let results = try context.fetch(request) //(request) //as? [NSManagedObject]
             return results
         } catch{
-            fatalError("Error is retriving Gorcery items")
+            fatalError("Error is retriving Speaker items")
         }
         
         return []
+    }
+    
+    func getSpeakerWithId(id: String) -> SpeakerObj? {
+        let request = SpeakerObj.getSpeakerWithId(model: self.getModel(), id: id)
+        do {
+            let context = self.getContext()
+            let results = try context.fetch(request) //(request) //as? [NSManagedObject]
+            
+            if results.count == 1 {
+                return results[0]
+            }
+        } catch{
+            fatalError("Error is retriving Speaker items")
+        }
+        
+        return nil
+
     }
     
     func saveSession(json: SessionJSON) {
@@ -47,7 +64,6 @@ class CoreDataController {
         
         let context = self.getContext()
         
-        //retrieve the entity that we just created
         let session = NSEntityDescription.insertNewObject(forEntityName: "SessionModel", into: context)
         session.setValue(json.sessionId, forKey: "sessionId")
         session.setValue(json.startTime, forKey: "startTime")
@@ -60,6 +76,36 @@ class CoreDataController {
         session.setValue(json.category, forKey: "category")
         //session.setValue(json.speakers, forKey: "speakers")
         //save the object
+        do {
+            try context.save()
+            print("saved!")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        } catch {
+            
+        }
+    }
+    
+    func saveSpeaker(json: SpeakerJSON) {
+        
+        
+        let context = self.getContext()
+        
+        let speaker = NSEntityDescription.insertNewObject(forEntityName: "SpeakerModel", into: context)
+        
+        speaker.setValue(json.biography, forKey: "biography")
+        speaker.setValue(json.firstName, forKey: "firstName")
+        speaker.setValue(json.lastName, forKey: "lastName")
+        speaker.setValue(json.gravatarUrl, forKey: "gravatarUrl")
+        speaker.setValue(json.linkedIn, forKey: "linkedInUrl")
+        speaker.setValue(json.blog, forKey: "blogUrl")
+        speaker.setValue(json.twitter, forKey: "twitterUrl")
+        speaker.setValue(json.github, forKey: "githubUrl")
+        speaker.setValue(json.speakerId, forKey: "speakerId")
+        
+        
+
+        
         do {
             try context.save()
             print("saved!")
