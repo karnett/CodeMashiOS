@@ -123,7 +123,10 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
             
             let detail = segue.destination as? SpeakerDetailsViewController
             let speaker = self.viewModel.getSpeakerAtIndex(row: self.selectedIndex!.row)
+            
+            let sessions = self.viewModel.getSessionsForSpeaker(id: (speaker?.speakerId)!)
             detail?.speaker = speaker
+            detail?.sessions = sessions
             
         }
     }

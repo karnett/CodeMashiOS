@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ObjectMapper
 
 class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var headerView: UIView!
@@ -17,7 +18,9 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
     //Buttons
-    let session: SessionJSON? = nil
+    var session: SessionObj?
+    var speakers: Array<SpeakerThinJSON> = []
+    
     let headerHeight: CGFloat = 45
     
     override func viewDidLoad() {
@@ -48,6 +51,10 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func style()
     {
+        
+        self.roomLabel.text = session?.rooms ?? "Unavailable"
+        self.titleLabel.text = session?.title ?? "Unavailable"
+        
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = UIColor.cmTeal()
         self.tabBarController?.tabBar.tintColor = UIColor.cmTeal()
@@ -60,14 +67,24 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "abstractCell")
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "abstractCell") as? BiographyTableViewCell
+            cell?.textView.text = self.session?.abstract ?? "Abstract is currently unavailable."
             return cell!
         }
+        let speaker = self.speakers[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "speakersCell")
+        let speakerCell = tableView.dequeueReusableCell(withIdentifier: "speakersCell") as? SpeakerTableViewCell
         
-        return cell!
+        if speaker.gravatarUrl != nil {
+            let url = "https:"+(speaker.gravatarUrl ?? "")
+            speakerCell?.profileImg.af_setImage(withURL: URL(string: url)!)
+        }
+        
+        speakerCell?.nameLabel.text = "\(speaker.firstName ?? "") \(speaker.lastName ?? "")"
+       
+        
+        
+        return speakerCell!
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -81,7 +98,10 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         if section == 0 {
             label.numberOfLines = 2
-            label.text = "10:00 AM - 11:00 AM\nSoft Skills"
+            let start = session?.startTime ?? "TBD"
+            let end = session?.endTime ?? "TBD"
+            let cateogry = session?.category ?? "Unknown"
+            label.text = "\(start) - \(end)\n\(cateogry)"
         } else if section == 1 {
             label.text = "Speakers"
             
@@ -110,7 +130,9 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
             return 1
         }
         else {
-            return 10
+            
+            self.speakers = Mapper<SpeakerThinJSON>().mapArray(JSONString: (session?.speakers)!) ?? []
+            return self.speakers.count
         }
     }
     

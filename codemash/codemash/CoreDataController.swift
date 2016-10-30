@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import ObjectMapper
 import CoreData
 
 class CoreDataController {
@@ -68,13 +69,16 @@ class CoreDataController {
         session.setValue(json.sessionId, forKey: "sessionId")
         session.setValue(json.startTime, forKey: "startTime")
         session.setValue(json.endTime, forKey: "endTime")
-        //session.setValue(json.rooms, forKey: "rooms")
+        session.setValue(json.rooms, forKey: "rooms")
         session.setValue(json.title, forKey: "title")
         session.setValue(json.abstract, forKey: "abstract")
         session.setValue(json.sessionType, forKey: "sessionType")
         // session.setValue(json.tags, forKey: "tags")
         session.setValue(json.category, forKey: "category")
-        //session.setValue(json.speakers, forKey: "speakers")
+        
+        let speakersJSON = Mapper().toJSONString(json.speakers!, prettyPrint: false)
+        session.setValue(speakersJSON, forKey: "speakers")
+        
         //save the object
         do {
             try context.save()
@@ -115,6 +119,23 @@ class CoreDataController {
             
         }
     }
+    
+    func getSpeakersForSession(id: String) -> [SpeakerThinJSON] {
+        let request = SessionObj.getSpeakersForSession(model: self.getModel(), id: id)
+        do {
+            let context = self.getContext()
+            let results = try context.fetch(request) //(request) //as? [NSManagedObject]
+            
+            if results.count == 1 {
+                return []
+            }
+        } catch{
+            fatalError("Error is retriving Speaker items")
+        }
+        
+        return []
+    }
+    
     
     func getContext () -> NSManagedObjectContext {
         

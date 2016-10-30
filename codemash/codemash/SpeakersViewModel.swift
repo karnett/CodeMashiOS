@@ -75,8 +75,9 @@ class SpeakersViewModel {
         return nil
     }
     
-    func getSessionsForSpeaker(id: String) {
-        
+    func getSessionsForSpeaker(id: String) -> [SessionObj] {
+        return []
+        //return self.coreData.getSessionsForSpeaker(id: id)
     }
     
     func filterSpeakers(text: String)

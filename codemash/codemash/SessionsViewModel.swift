@@ -62,4 +62,10 @@ class SessionsViewModel {
         }
         return nil
     }
+    
+    func getSpeakersForSessions(id: String) -> [SpeakerThinJSON] {
+        
+        return self.coreData.getSpeakersForSession(id: id)
+    }
+    
 }

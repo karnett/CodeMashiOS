@@ -38,6 +38,8 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     let detailSegue: String = "showDetails" //Session Details
     
     var viewModel: SessionsViewModel!
+    var selectedIndex: IndexPath?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +98,10 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == detailSegue {
-            let detail = segue.destination as? SessionDetailsViewController
+            let session = viewModel.getSessionAtIndex(row: (selectedIndex?.row)!)
+            
+            var detail = segue.destination as? SessionDetailsViewController
+            detail?.session = session!
         }
     }
     
@@ -112,8 +117,8 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         if session != nil {
             cell?.titleLabel.text = session!.title ?? ""
             cell?.titleLabel.sizeToFit()
-            //cell?.roomLabel = session?.rooms[0] ?? ""
-            cell?.timeLabel.text = "" ?? "TBD"
+            cell?.roomLabel.text = session?.rooms ?? "TBD"
+            cell?.timeLabel.text = session?.startTime ?? "TBD"
         }
         return cell!
     }
@@ -132,6 +137,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath
         self.performSegue(withIdentifier: detailSegue, sender: self)
     }
     
