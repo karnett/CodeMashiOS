@@ -14,12 +14,16 @@ class SessionsViewModel {
     
     var sessions: [SessionObj] = []
     
+    let prefs = UserDefaults.standard
+    let favKey = "favoriteSessions"
+    
     init(rest: RestController, coreData: CoreDataController) {
         self.rest = rest
         self.coreData = coreData
     }
     
     func loadSessionsForDay(day: Day) {
+        
         
         self.sessions = self.coreData.getSessions()
         
@@ -66,6 +70,39 @@ class SessionsViewModel {
     func getSpeakersForSessions(id: String) -> [SpeakerThinJSON] {
         
         return self.coreData.getSpeakersForSession(id: id)
+    }
+    
+    func favoriteSession(id: String, isFavorited: Bool) {
+        var favorites = prefs.array(forKey: favKey) ?? []
+        favorites.append(id)
+        
+        prefs.set(favorites, forKey: favKey)
+    }
+    
+    func getFavorites() -> [SessionObj] {
+        let favorites: [String] = prefs.object(forKey: favKey) as? [String] ?? []
+        var sessions: [SessionObj] = []
+        for fav in favorites {
+            if let session = self.getSessionWithId(id: fav) {
+                sessions.append(session)
+            }
+        }
+        
+        return sessions
+    }
+    
+    func getSessionWithId(id: String) -> SessionObj? {
+        return self.coreData.getSessionWithId(id: id)
+    }
+    
+    func isSessionFavorite(id: String) -> Bool {
+        let favorites = self.getFavorites()
+        for fav in favorites {
+            if "\(fav.sessionId!)" == id {
+                return true
+            }
+        }
+        return false
     }
     
 }

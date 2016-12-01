@@ -10,13 +10,13 @@ import UIKit
 import CoreData
 
 enum Day: Int {
-    case Favorites = 0, Tuesday, Wednesday, Thursday, Friday
+    case Tuesday = 1, Wednesday, Thursday, Friday
 }
 
 class SessionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var filterBtn: UIButton!
     
     //Buttons
-    @IBOutlet weak var favoritesBtn: UIButton!
     @IBOutlet weak var tuesdayBtn: UIButton!
     @IBOutlet weak var wednesdayBtn: UIButton!
     @IBOutlet weak var thursdayBtn: UIButton!
@@ -32,7 +32,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     var restController = RestController()
     var coreDataController = CoreDataController()
     
-    var headerTitle: String = "Favorites" //Default
+    var headerTitle: String = "Tuesday" //Default
     let headerHeight: CGFloat = 45
     
     let detailSegue: String = "showDetails" //Session Details
@@ -46,10 +46,10 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         viewModel = SessionsViewModel(rest: restController, coreData: coreDataController)
-        viewModel.loadSessionsForDay(day: .Favorites)
+        viewModel.loadSessionsForDay(day: .Tuesday)
         
         styleBtns()
-        selectedDay(day: Day.Favorites)
+        selectedDay(day: Day.Tuesday)
         self.scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
         
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -119,7 +119,20 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
             cell?.titleLabel.sizeToFit()
             cell?.roomLabel.text = session?.rooms ?? "TBD"
             cell?.timeLabel.text = session?.startTime ?? "TBD"
+            if let id = session?.sessionId {
+                cell?.favoriteButton.isSelected = self.viewModel.isSessionFavorite(id: "\(id)")
+            }
+            
+            if session?.sessionType != "Kidz Mash" {
+                cell?.kidzmashIcon.isHidden = true
+            } else {
+                
+                cell?.kidzmashIcon.isHidden = false
+            }
+            
         }
+        cell?.favoriteButton.tag = indexPath.row
+        cell?.favoriteButton.addTarget(self, action: #selector(favoriteBtnSelected), for: .touchUpInside)
         return cell!
     }
     
@@ -157,11 +170,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     func selectedDay(day: Day){
         clearBtnBackgrounds()
         switch day {
-            case .Favorites:
-                self.favoritesBtn.layer.borderColor = UIColor.white.cgColor
-                self.favoritesBtn.layer.borderWidth = 1.0
-                self.headerTitle = "Favorites"
-                print("Favorites")
             case .Tuesday:
                 
                 self.tuesdayBtn.layer.borderColor = UIColor.white.cgColor
@@ -191,7 +199,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func clearBtnBackgrounds() {
-        self.favoritesBtn.layer.borderColor = UIColor.clear.cgColor
         self.tuesdayBtn.layer.borderColor = UIColor.clear.cgColor
         self.wednesdayBtn.layer.borderColor = UIColor.clear.cgColor
         self.thursdayBtn.layer.borderColor = UIColor.clear.cgColor
@@ -199,13 +206,29 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func styleBtns() {
-        self.favoritesBtn.layer.cornerRadius = 8.0
         self.tuesdayBtn.layer.cornerRadius = 8.0
         self.wednesdayBtn.layer.cornerRadius = 8.0
         self.thursdayBtn.layer.cornerRadius = 8.0
         self.fridayBtn.layer.cornerRadius = 8.0
     }
     
+    func favoriteBtnSelected(sender: UIButton) {
+        let row = sender.tag
+        print("Favorited item at: \(row)")
+        let session = viewModel.getSessionAtIndex(row: row)
+        if let id = session?.sessionId {
+            self.viewModel.favoriteSession(id: "\(id)", isFavorited: sender.isSelected)
+            sender.isSelected = !sender.isSelected
+            
+            
+        }
+        //self.tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .automatic)
+    }
+    
+    
+    @IBAction func filterBtnPressed(_ sender: AnyObject) {
+        print("Show Filters")
+    }
 
 
 }

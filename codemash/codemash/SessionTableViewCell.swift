@@ -18,4 +18,5 @@ class SessionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var kidzmashIcon: UIImageView!
 }

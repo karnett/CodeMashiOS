@@ -20,6 +20,11 @@ class SessionObj: NSManagedObject {
         return fetchRequest
     }
     
+    @nonobjc public class func getSessionWithId(model: NSManagedObjectModel, id: String) ->NSFetchRequest<SessionObj> {
+        let fetchRequest = NSFetchRequest<SessionObj>(entityName: "SessionModel")
+        fetchRequest.predicate = NSPredicate(format: "sessionId == %@", id)
+        return fetchRequest
+    }
     
     @NSManaged public var sessionId: NSNumber?
     @NSManaged public var startTime: String? //2015-01-08T08:00:00

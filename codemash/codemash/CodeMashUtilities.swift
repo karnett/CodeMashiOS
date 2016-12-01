@@ -12,8 +12,6 @@ import Foundation
 
 
 extension UIColor {
-    
-    
     public static func cmTeal() -> UIColor {
         return hexStringToUIColor(hex: "#3fbbae")
     }

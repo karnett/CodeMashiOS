@@ -28,6 +28,24 @@ class CoreDataController {
         return []
     }
     
+    
+    func getSessionWithId(id: String) -> SessionObj? {
+        let request = SessionObj.getSessionWithId(model: self.getModel(), id: id)
+        do {
+            let context = self.getContext()
+            let results = try context.fetch(request) //(request) //as? [NSManagedObject]
+            
+            if results.count == 1 {
+                return results[0]
+            }
+        } catch{
+            fatalError("Error is retriving Speaker items")
+        }
+        
+        return nil
+    }
+    
+    
     func getSpeakers() -> [SpeakerObj]  {
         
         let request = SpeakerObj.fetchRequest(model:  self.getModel())
