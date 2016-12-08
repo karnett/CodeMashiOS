@@ -61,7 +61,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        self.tableView.estimatedRowHeight = 70.0
+        self.tableView.estimatedRowHeight = 100.0
 
         
     }
@@ -102,6 +102,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
             
             var detail = segue.destination as? SessionDetailsViewController
             detail?.session = session!
+            detail?.timeString = self.viewModel.getTimeFromString(startDate: session!.startTime, endDate: session!.endTime)
         }
     }
     
@@ -117,8 +118,24 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         if session != nil {
             cell?.titleLabel.text = session!.title ?? ""
             cell?.titleLabel.sizeToFit()
-            cell?.roomLabel.text = session?.rooms ?? "TBD"
-            cell?.timeLabel.text = session?.startTime ?? "TBD"
+            let rooms: [String] = session?.rooms ?? []
+            
+            var roomString = ""
+            
+            
+            for index in 0..<rooms.count {
+                
+                roomString.append(rooms[index])
+                
+                if index != (rooms.count-1) {
+                    roomString.append(", ")
+                }
+            }
+            
+            
+            cell?.roomLabel.text = roomString
+            cell?.timeLabel.text =  viewModel.getTimeFromString(startDate: session?.startTime, endDate: session?.endTime)
+            
             if let id = session?.sessionId {
                 cell?.favoriteButton.isSelected = self.viewModel.isSessionFavorite(id: "\(id)")
             }
@@ -176,24 +193,37 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 self.tuesdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Tuesday"
                 print("Tues")
+                
+                viewModel.loadSessionsForDay(day: .Tuesday)
+            
+                self.tableView.setContentOffset(CGPoint.zero, animated:true)
             case .Wednesday:
                 
                 self.wednesdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.wednesdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Wednesday"
                 print("Wed")
+                
+                viewModel.loadSessionsForDay(day: .Wednesday)
+                self.tableView.setContentOffset(CGPoint.zero, animated:true)
             case .Thursday:
                 
                 self.thursdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.thursdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Thursday"
                 print("Thurs")
+                
+                viewModel.loadSessionsForDay(day: .Thursday)
+                self.tableView.setContentOffset(CGPoint.zero, animated:true)
             case .Friday:
                 
                 self.fridayBtn.layer.borderColor = UIColor.white.cgColor
                 self.fridayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Friday"
                 print("Friday")
+                
+                viewModel.loadSessionsForDay(day: .Friday)
+                self.tableView.setContentOffset(CGPoint.zero, animated:true)
         }
         self.tableView.reloadData()
     }

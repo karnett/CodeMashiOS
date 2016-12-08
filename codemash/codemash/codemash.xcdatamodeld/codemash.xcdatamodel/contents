@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16B2657" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SessionModel" representedClassName=".SessionObj" syncable="YES">
         <attribute name="abstract" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="day" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="rooms" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rooms" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="sessionId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sessionType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="speakers" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="SpeakerModel" representedClassName=".SpeakerObj" syncable="YES">
@@ -26,7 +27,7 @@
     <fetchRequest name="GetSessions" entity="SessionModel" predicateString="sessionId != 0"/>
     <fetchRequest name="GetSpeakers" entity="SpeakerModel" predicateString="speakerId != 0"/>
     <elements>
-        <element name="SessionModel" positionX="-18" positionY="27" width="128" height="195"/>
+        <element name="SessionModel" positionX="-18" positionY="27" width="128" height="210"/>
         <element name="SpeakerModel" positionX="-45" positionY="0" width="128" height="180"/>
     </elements>
 </model>

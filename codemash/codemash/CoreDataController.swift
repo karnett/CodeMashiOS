@@ -87,12 +87,15 @@ class CoreDataController {
         session.setValue(json.sessionId, forKey: "sessionId")
         session.setValue(json.startTime, forKey: "startTime")
         session.setValue(json.endTime, forKey: "endTime")
+        
         session.setValue(json.rooms, forKey: "rooms")
         session.setValue(json.title, forKey: "title")
         session.setValue(json.abstract, forKey: "abstract")
         session.setValue(json.sessionType, forKey: "sessionType")
         // session.setValue(json.tags, forKey: "tags")
         session.setValue(json.category, forKey: "category")
+        
+        session.setValue(getDayIntForDate(time: json.startTime!), forKey: "day")
         
         let speakersJSON = Mapper().toJSONString(json.speakers!, prettyPrint: false)
         session.setValue(speakersJSON, forKey: "speakers")
@@ -106,6 +109,20 @@ class CoreDataController {
         } catch {
             
         }
+    }
+    
+    func getDayIntForDate(time: String) -> Int {
+        
+        if time.contains("2017-01-10") {
+            return 0
+        } else if time.contains("2017-01-11") {
+            return 1
+        } else if time.contains("2017-01-12") {
+            return 2
+        } else if time.contains("2017-01-13") {
+            return 3
+        }
+        return 0
     }
     
     func saveSpeaker(json: SpeakerJSON) {
@@ -136,6 +153,21 @@ class CoreDataController {
         } catch {
             
         }
+    }
+    
+    func getSessionsForDay(day: Int) -> [SessionObj] {
+        let request = SessionObj.getSessionForDay(model: self.getModel(), day: day)
+        do {
+            let context = self.getContext()
+            let results = try context.fetch(request) //(request) //as? [NSManagedObject]
+            
+            
+            return results
+        } catch{
+            fatalError("Error is retriving Speaker items")
+        }
+        
+        return []
     }
     
     func getSpeakersForSession(id: String) -> [SpeakerThinJSON] {

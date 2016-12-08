@@ -19,6 +19,7 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     //Buttons
     var session: SessionObj?
+    var timeString: String = "N/A"
     var speakers: Array<SpeakerThinJSON> = []
     
     let headerHeight: CGFloat = 45
@@ -52,8 +53,24 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     func style()
     {
         
-        self.roomLabel.text = session?.rooms ?? "Unavailable"
+       // self.roomLabel.text = session?.rooms ?? "Unavailable"
         self.titleLabel.text = session?.title ?? "Unavailable"
+        
+        let rooms: [String] = session?.rooms ?? []
+        
+        var roomString = ""
+        
+        
+        for index in 0..<rooms.count {
+            
+            roomString.append(rooms[index])
+            
+            if index != (rooms.count-1) {
+                roomString.append(", ")
+            }
+        }
+        
+        self.roomLabel.text = roomString
         
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = UIColor.cmTeal()
@@ -98,10 +115,10 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         if section == 0 {
             label.numberOfLines = 2
-            let start = session?.startTime ?? "TBD"
-            let end = session?.endTime ?? "TBD"
+            self.timeString = self.timeString.replacingOccurrences(of: "\n", with: " ")
+            
             let cateogry = session?.category ?? "Unknown"
-            label.text = "\(start) - \(end)\n\(cateogry)"
+            label.text = "\(self.timeString)\n\(cateogry)"
         } else if section == 1 {
             label.text = "Speakers"
             
@@ -113,7 +130,7 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.performSegue(withIdentifier: detailSegue, sender: self)
+        //jump to speaker details
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -142,6 +159,5 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
         return 70.0
     }
-
     
 }

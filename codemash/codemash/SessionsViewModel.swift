@@ -14,6 +14,8 @@ class SessionsViewModel {
     
     var sessions: [SessionObj] = []
     
+    var loadingSessions = false
+    
     let prefs = UserDefaults.standard
     let favKey = "favoriteSessions"
     
@@ -25,17 +27,22 @@ class SessionsViewModel {
     func loadSessionsForDay(day: Day) {
         
         
-        self.sessions = self.coreData.getSessions()
+        self.sessions = self.coreData.getSessionsForDay(day: (day.rawValue-1)) //start index at 0
         
-        if sessions.count == 0 {
+        
+        
+        let otherSessions = self.coreData.getSessions()
+        if sessions.count == 0 && !loadingSessions {
+            self.loadingSessions = true
             requestSessions()
         }
     }
     
     func requestSessions() {
         self.rest.loadSessions(completionHandler: { result in
-            
+            self.loadingSessions = false
             switch result {
+                
                 
             case .success(let data):
                 
@@ -103,6 +110,33 @@ class SessionsViewModel {
             }
         }
         return false
+    }
+    
+    func getTimeFromString(startDate: String?, endDate: String?) -> String {
+        
+        if startDate == nil {
+            return "N/A"
+        }
+        
+        let dateForm = DateFormatter()
+        dateForm.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"
+        
+        let start = dateForm.date(from: startDate!)
+        
+        if endDate == nil {
+            dateForm.dateFormat = "hh:mm a"
+            return "\n\(dateForm.string(from: start!))"
+            
+        }
+        
+        let end = dateForm.date(from: endDate!)
+        
+        dateForm.dateFormat = "hh:mm a"
+        return "\(dateForm.string(from: start!))\nto \(dateForm.string(from: end!))"
+        
+       // return (date.components(separatedBy: "T")[1] as? String)!
+        
+        
     }
     
 }

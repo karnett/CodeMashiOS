@@ -16,6 +16,7 @@ class SpeakersViewModel {
     var filtered: [SpeakerObj] = []
     
     var isFiltering = false
+    var loadingSpeakers = false
 
     init(rest: RestController, coreData: CoreDataController) {
         self.rest = rest
@@ -25,7 +26,8 @@ class SpeakersViewModel {
     func loadSpeakers() {
         self.speakers = self.coreData.getSpeakers()
         
-        if speakers.count == 0 {
+        if speakers.count == 0 && !loadingSpeakers {
+            loadingSpeakers = true
             requestSpeakers()
         }
     }
@@ -34,6 +36,7 @@ class SpeakersViewModel {
         //move to core data
         self.rest.loadSpeakers(completionHandler: { result in
             
+            self.loadingSpeakers = false
             switch result {
                 
             case .success(let data):

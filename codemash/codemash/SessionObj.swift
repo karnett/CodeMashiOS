@@ -26,10 +26,23 @@ class SessionObj: NSManagedObject {
         return fetchRequest
     }
     
+    @nonobjc public class func getSessionForDay(model: NSManagedObjectModel, day: Int) ->NSFetchRequest<SessionObj> {
+        //DAY:
+        //10 - 0
+        //11 - 1
+        //12 - 2
+        //13 - 3
+        
+        let fetchRequest = NSFetchRequest<SessionObj>(entityName: "SessionModel")
+        fetchRequest.predicate = NSPredicate(format: "day == %d", day)
+        return fetchRequest
+    }
+    
     @NSManaged public var sessionId: NSNumber?
+    @NSManaged public var day: NSNumber?
     @NSManaged public var startTime: String? //2015-01-08T08:00:00
     @NSManaged public var endTime: String?
-    @NSManaged public var rooms: String?
+    @NSManaged public var rooms: [String]?
     
     @NSManaged public var title: String?
     @NSManaged public var abstract: String?

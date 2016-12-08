@@ -126,7 +126,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -174,6 +174,10 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         label.text = self.getTextForSection(section: section)
         view.addSubview(label)
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
     func getTextForSection(section: Int) -> String {
