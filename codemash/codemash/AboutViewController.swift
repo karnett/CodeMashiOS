@@ -13,10 +13,11 @@ class AboutViewController: UIViewController {
     
     var restController = RestController()
     
+    @IBOutlet weak var githubBtn: KAButton!
     
-    @IBOutlet weak var websiteBtn: UIButton!
+    @IBOutlet weak var websiteBtn: KAButton!
     
-    @IBOutlet weak var directionsBtn: UIButton!
+    @IBOutlet weak var directionsBtn: KAButton!
     
     @IBOutlet weak var iconsBtn: UIButton!
     
@@ -25,12 +26,18 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
         
         self.headerView.backgroundColor = UIColor.cmLime()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         style()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,24 +50,49 @@ class AboutViewController: UIViewController {
     {
         self.tabBarController?.tabBar.tintColor = UIColor.cmLime()
         
-        self.websiteBtn.tintColor = UIColor.cmTeal()
-        self.directionsBtn.tintColor = UIColor.cmTeal()
-        self.iconsBtn.tintColor = UIColor.cmTeal()
+        self.websiteBtn.tintColor = UIColor.cmDarkGrey()
+        self.directionsBtn.tintColor = UIColor.cmDarkGrey()
+        self.iconsBtn.tintColor = UIColor.cmDarkGrey()
+        
+        self.websiteBtn.layer.borderColor = UIColor.cmOrange().cgColor
+        self.websiteBtn.layer.borderWidth = 1.0
+        self.websiteBtn.layer.cornerRadius = self.websiteBtn.frame.size.width/2
+        
+        
+        self.directionsBtn.layer.borderColor = UIColor.cmLime().cgColor
+        self.directionsBtn.layer.borderWidth = 1.0
+        self.directionsBtn.layer.cornerRadius = self.directionsBtn.frame.size.width/2
+        
+        
+        self.githubBtn.layer.borderColor = UIColor.cmBlue().cgColor
+        self.githubBtn.layer.borderWidth = 1.0
+        self.githubBtn.layer.cornerRadius = self.githubBtn.frame.size.width/2
+        
     }
     
+    
     @IBAction func websiteBntPressed(_ sender: AnyObject) {
-        
-        UIApplication.shared.openURL(URL(string: "http://codemash.org")!)
+        self.openURL(url: "http://codemash.org")
     }
     
     @IBAction func directionsBtnPressed(_ sender: AnyObject) {
         
-        UIApplication.shared.openURL(URL(string: "http://maps.apple.com/?address=7000%40Kalahari%40Dr,Sandusky,OH,44870")!)
+        self.openURL(url: "http://maps.apple.com/?address=7000%20Kalahari%20Dr,Sandusky,OH,44870")
     }
     
     @IBAction func iconsBtnPressed(_ sender: AnyObject) {
+        
+        self.openURL(url: "https://icons8.com")
     }
     
+    @IBAction func githubBtnPressed(_ sender: Any) {
+        
+        self.openURL(url: "https://github.com/karnett/CodeMashiOS")
+    }
+    
+    func openURL(url: String) {
+        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+    }
     
 }
 

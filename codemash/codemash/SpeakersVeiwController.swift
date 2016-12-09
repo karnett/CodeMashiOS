@@ -35,9 +35,6 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.navigationBar.isHidden = true
         
         self.headerView.backgroundColor = UIColor.cmBlue()
-        viewModel = SpeakersViewModel(rest: restController, coreData: coreDataController)
-        viewModel.loadSpeakers()
-       
         
         
         self.tableView.delegate = self

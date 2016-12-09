@@ -30,6 +30,10 @@ extension UIColor {
     public static func cmGrey() -> UIColor {
         return hexStringToUIColor(hex: "#eaeaea")
     }
+    
+    public static func cmDarkGrey() -> UIColor {
+        return hexStringToUIColor(hex: "#333333")
+    }
 }
 
 

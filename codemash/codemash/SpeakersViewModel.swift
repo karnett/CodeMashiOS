@@ -36,7 +36,6 @@ class SpeakersViewModel {
         //move to core data
         self.rest.loadSpeakers(completionHandler: { result in
             
-            self.loadingSpeakers = false
             switch result {
                 
             case .success(let data):
@@ -54,6 +53,11 @@ class SpeakersViewModel {
                 //alert
                 print(error)
             }
+            
+            
+            
+            self.loadingSpeakers = false
+            
             
         })
     }

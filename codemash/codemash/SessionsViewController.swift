@@ -100,7 +100,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         if segue.identifier == detailSegue {
             let session = viewModel.getSessionAtIndex(row: (selectedIndex?.row)!)
             
-            var detail = segue.destination as? SessionDetailsViewController
+            let detail = segue.destination as? SessionDetailsViewController
             detail?.session = session!
             detail?.timeString = self.viewModel.getTimeFromString(startDate: session!.startTime, endDate: session!.endTime)
         }

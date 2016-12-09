@@ -29,9 +29,6 @@ class SessionsViewModel {
         
         self.sessions = self.coreData.getSessionsForDay(day: (day.rawValue-1)) //start index at 0
         
-        
-        
-        let otherSessions = self.coreData.getSessions()
         if sessions.count == 0 && !loadingSessions {
             self.loadingSessions = true
             requestSessions()
