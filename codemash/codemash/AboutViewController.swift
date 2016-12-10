@@ -55,12 +55,12 @@ class AboutViewController: UIViewController {
         self.iconsBtn.tintColor = UIColor.cmDarkGrey()
         
         self.websiteBtn.layer.borderColor = UIColor.cmOrange().cgColor
-        self.websiteBtn.layer.borderWidth = 1.0
+        self.websiteBtn.layer.borderWidth = 2.0
         self.websiteBtn.layer.cornerRadius = self.websiteBtn.frame.size.width/2
         
         
         self.directionsBtn.layer.borderColor = UIColor.cmLime().cgColor
-        self.directionsBtn.layer.borderWidth = 1.0
+        self.directionsBtn.layer.borderWidth = 3.0
         self.directionsBtn.layer.cornerRadius = self.directionsBtn.frame.size.width/2
         
         

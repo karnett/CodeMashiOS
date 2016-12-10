@@ -196,7 +196,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 viewModel.loadSessionsForDay(day: .Tuesday)
             
-                self.tableView.setContentOffset(CGPoint.zero, animated:true)
+                scrollTableToTop()
             case .Wednesday:
                 
                 self.wednesdayBtn.layer.borderColor = UIColor.white.cgColor
@@ -205,7 +205,8 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 print("Wed")
                 
                 viewModel.loadSessionsForDay(day: .Wednesday)
-                self.tableView.setContentOffset(CGPoint.zero, animated:true)
+                
+                scrollTableToTop()
             case .Thursday:
                 
                 self.thursdayBtn.layer.borderColor = UIColor.white.cgColor
@@ -214,7 +215,8 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 print("Thurs")
                 
                 viewModel.loadSessionsForDay(day: .Thursday)
-                self.tableView.setContentOffset(CGPoint.zero, animated:true)
+                
+                scrollTableToTop()
             case .Friday:
                 
                 self.fridayBtn.layer.borderColor = UIColor.white.cgColor
@@ -223,9 +225,17 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 print("Friday")
                 
                 viewModel.loadSessionsForDay(day: .Friday)
-                self.tableView.setContentOffset(CGPoint.zero, animated:true)
+                
+                scrollTableToTop()
         }
         self.tableView.reloadData()
+    }
+    
+    func scrollTableToTop() {
+        
+        if self.tableView.numberOfRows(inSection: 0) > 0 {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     func clearBtnBackgrounds() {
@@ -249,10 +259,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         if let id = session?.sessionId {
             self.viewModel.favoriteSession(id: "\(id)", isFavorited: sender.isSelected)
             sender.isSelected = !sender.isSelected
-            
-            
         }
-        //self.tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .automatic)
     }
     
     

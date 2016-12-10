@@ -48,6 +48,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.estimatedRowHeight = 70.0
+        self.tableView.separatorStyle = .none
         
         if speaker != nil {
             loadSpeakerView()
@@ -177,7 +178,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        return UIView()
     }
     
     func getTextForSection(section: Int) -> String {
