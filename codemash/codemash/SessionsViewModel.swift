@@ -18,6 +18,7 @@ class SessionsViewModel {
     
     let prefs = UserDefaults.standard
     let favKey = "favoriteSessions"
+    var currentDay: Day = .Tuesday //default
     
     init(rest: RestController, coreData: CoreDataController) {
         self.rest = rest
@@ -26,7 +27,7 @@ class SessionsViewModel {
     
     func loadSessionsForDay(day: Day) {
         
-        
+        currentDay = day
         self.sessions = self.coreData.getSessionsForDay(day: (day.rawValue-1)) //start index at 0
         
         if sessions.count == 0 && !loadingSessions {
@@ -47,8 +48,9 @@ class SessionsViewModel {
                     self.coreData.saveSession(json: entry)
                 }
                 
-                self.sessions = self.coreData.getSessions()
+                self.sessions = self.coreData.getSessionsForDay(day: (self.currentDay.rawValue-1)) //start index at 0
                 
+
                 //send notification to reload table
                 NotificationCenter.default.post(name: NotificationName.sessionsLoaded, object: nil)
 

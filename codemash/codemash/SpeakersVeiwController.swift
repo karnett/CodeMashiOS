@@ -16,6 +16,11 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var loadingLabel: UILabel!
+    
+    
     var restController = RestController()
     var coreDataController = CoreDataController()
     
@@ -42,15 +47,10 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         
         definesPresentationContext = true
         
-        
-        
-        
         self.edgesForExtendedLayout = .all
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
-        
-        
-    }
+     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -90,7 +90,10 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsInSection(section: section)
+        let number = viewModel.numberOfRowsInSection(section: section)
+        self.updateLoading(start: number == 0)
+       
+        return  number
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,6 +129,15 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
             detail?.sessions = sessions
             
         }
+    }
+    
+    func updateLoading(start: Bool) {
+        if start {
+            self.activityIndicator.startAnimating()
+        } else {
+            self.activityIndicator.stopAnimating()
+        }
+        self.loadingLabel.isHidden = !start
     }
     
 }
