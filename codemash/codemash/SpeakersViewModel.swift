@@ -17,6 +17,9 @@ class SpeakersViewModel {
     
     var isFiltering = false
     var loadingSpeakers = false
+    
+    let prefs = UserDefaults.standard
+    let updateKey = "speakerServerUpdate"
 
     init(rest: RestController, coreData: CoreDataController) {
         self.rest = rest
@@ -26,7 +29,12 @@ class SpeakersViewModel {
     func loadSpeakers() {
         self.speakers = self.coreData.getSpeakers()
         
-        if speakers.count == 0 && !loadingSpeakers {
+        let needToLoad: Bool = (speakers.count == 0 && !loadingSpeakers)
+        
+        let dateRefreshed = self.getLastUpdateFromServer()
+        let needToRefresh: Bool = (dateRefreshed == nil || numOfDays(first: dateRefreshed!, second: Date()) > 0)
+        
+        if needToLoad || needToRefresh {
             loadingSpeakers = true
             requestSpeakers()
         }
@@ -43,6 +51,7 @@ class SpeakersViewModel {
                 for entry in data {
                     self.coreData.saveSpeaker(json: entry)
                 }
+                self.setLastUpdateFromServer()
                 
                 self.speakers = self.coreData.getSpeakers()
                 
@@ -60,6 +69,27 @@ class SpeakersViewModel {
             
             
         })
+    }
+    
+    func numOfDays(first: Date, second: Date) -> Int {
+        let calendar = Calendar.current
+        
+        // Replace the hour (time) of both dates with 00:00
+        let date1 = calendar.startOfDay(for: first)
+        let date2 = calendar.startOfDay(for: second)
+        
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+        
+        
+        return components.day ?? 5 //default needs to be more than 1
+    }
+    
+    func setLastUpdateFromServer() {
+        prefs.set(Date(), forKey: updateKey)
+    }
+    
+    func getLastUpdateFromServer() -> Date? {
+        return prefs.object(forKey: updateKey) as? Date ?? nil
     }
     
     func numberOfRowsInSection(section: Int) -> Int {

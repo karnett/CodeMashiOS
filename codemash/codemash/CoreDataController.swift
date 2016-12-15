@@ -83,32 +83,81 @@ class CoreDataController {
         
         let context = self.getContext()
         
-        let session = NSEntityDescription.insertNewObject(forEntityName: "SessionModel", into: context)
-        session.setValue(json.sessionId, forKey: "sessionId")
-        session.setValue(json.startTime, forKey: "startTime")
-        session.setValue(json.endTime, forKey: "endTime")
+        let exists = sessionExists(json: json) //if exists, it'll update, else insert
         
-        session.setValue(json.rooms, forKey: "rooms")
-        session.setValue(json.title, forKey: "title")
-        session.setValue(json.abstract, forKey: "abstract")
-        session.setValue(json.sessionType, forKey: "sessionType")
-        // session.setValue(json.tags, forKey: "tags")
-        session.setValue(json.category, forKey: "category")
-        
-        session.setValue(getDayIntForDate(time: json.startTime!), forKey: "day")
-        
-        let speakersJSON = Mapper().toJSONString(json.speakers!, prettyPrint: false)
-        session.setValue(speakersJSON, forKey: "speakers")
-        
-        //save the object
-        do {
-            try context.save()
-            print("saved!")
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        } catch {
+        if !exists {
+            let session = NSEntityDescription.insertNewObject(forEntityName: "SessionModel", into: context)
+            session.setValue(json.sessionId, forKey: "sessionId")
+            session.setValue(json.startTime, forKey: "startTime")
+            session.setValue(json.endTime, forKey: "endTime")
             
+            session.setValue(json.rooms, forKey: "rooms")
+            session.setValue(json.title, forKey: "title")
+            session.setValue(json.abstract, forKey: "abstract")
+            session.setValue(json.sessionType, forKey: "sessionType")
+            // session.setValue(json.tags, forKey: "tags")
+            session.setValue(json.category, forKey: "category")
+            
+            session.setValue(getDayIntForDate(time: json.startTime!), forKey: "day")
+            
+            let speakersJSON = Mapper().toJSONString(json.speakers!, prettyPrint: false)
+            session.setValue(speakersJSON, forKey: "speakers")
+            
+            //save the object
+            do {
+                try context.save()
+                print("saved!")
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            } catch {
+                
+            }
         }
+        
+        
+    }
+    
+    func sessionExists(json: SessionJSON) -> Bool {
+        let request = SessionObj.getSessionWithId(model: self.getModel(), id: "\(json.sessionId!)")
+        
+        do {
+            let context = self.getContext()
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                //record exists - update and return true to skip insert
+                
+                let session = results[0]
+
+                session.setValue(json.sessionId, forKey: "sessionId")
+                session.setValue(json.startTime, forKey: "startTime")
+                session.setValue(json.endTime, forKey: "endTime")
+                
+                session.setValue(json.rooms, forKey: "rooms")
+                session.setValue(json.title, forKey: "title")
+                session.setValue(json.abstract, forKey: "abstract")
+                session.setValue(json.sessionType, forKey: "sessionType")
+                // session.setValue(json.tags, forKey: "tags")
+                session.setValue(json.category, forKey: "category")
+                
+                session.setValue(getDayIntForDate(time: json.startTime!), forKey: "day")
+                
+                let speakersJSON = Mapper().toJSONString(json.speakers!, prettyPrint: false)
+                session.setValue(speakersJSON, forKey: "speakers")
+                
+                //save the object
+                
+                try context.save()
+                print("updated!")
+
+                
+                return true
+            }
+        } catch{
+            fatalError("Error is retriving Speaker items")
+        }
+        
+        return false
     }
     
     func getDayIntForDate(time: String) -> Int {
@@ -130,29 +179,71 @@ class CoreDataController {
         
         let context = self.getContext()
         
-        let speaker = NSEntityDescription.insertNewObject(forEntityName: "SpeakerModel", into: context)
+        let exists = speakerExists(json: json) //if exists, udpated in method
         
-        speaker.setValue(json.biography, forKey: "biography")
-        speaker.setValue(json.firstName, forKey: "firstName")
-        speaker.setValue(json.lastName, forKey: "lastName")
-        speaker.setValue(json.gravatarUrl, forKey: "gravatarUrl")
-        speaker.setValue(json.linkedIn, forKey: "linkedInUrl")
-        speaker.setValue(json.blog, forKey: "blogUrl")
-        speaker.setValue(json.twitter, forKey: "twitterUrl")
-        speaker.setValue(json.github, forKey: "githubUrl")
-        speaker.setValue(json.speakerId, forKey: "speakerId")
-        
-        
-
+        if !exists { //insert new
+            let speaker = NSEntityDescription.insertNewObject(forEntityName: "SpeakerModel", into: context)
+            
+            speaker.setValue(json.biography, forKey: "biography")
+            speaker.setValue(json.firstName, forKey: "firstName")
+            speaker.setValue(json.lastName, forKey: "lastName")
+            speaker.setValue(json.gravatarUrl, forKey: "gravatarUrl")
+            speaker.setValue(json.linkedIn, forKey: "linkedInUrl")
+            speaker.setValue(json.blog, forKey: "blogUrl")
+            speaker.setValue(json.twitter, forKey: "twitterUrl")
+            speaker.setValue(json.github, forKey: "githubUrl")
+            speaker.setValue(json.speakerId, forKey: "speakerId")
+            
+            
+            
+            
+            do {
+                try context.save()
+                print("speaker saved!")
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            } catch {
+                
+            }
+        }
+    }
+    
+    func speakerExists(json: SpeakerJSON) -> Bool {
+        let request = SpeakerObj.getSpeakerWithId(model: self.getModel(), id: "\(json.speakerId!)")
         
         do {
-            try context.save()
-            print("saved!")
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        } catch {
+            let context = self.getContext()
+            let results = try context.fetch(request)
             
+            if results.count > 0 {
+                //record exists - update and return true to skip insert
+                
+                let speaker = results[0]
+                
+                speaker.setValue(json.biography, forKey: "biography")
+                speaker.setValue(json.firstName, forKey: "firstName")
+                speaker.setValue(json.lastName, forKey: "lastName")
+                speaker.setValue(json.gravatarUrl, forKey: "gravatarUrl")
+                speaker.setValue(json.linkedIn, forKey: "linkedInUrl")
+                speaker.setValue(json.blog, forKey: "blogUrl")
+                speaker.setValue(json.twitter, forKey: "twitterUrl")
+                speaker.setValue(json.github, forKey: "githubUrl")
+                speaker.setValue(json.speakerId, forKey: "speakerId")
+
+                
+                //save the object
+                
+                try context.save()
+                print("speaker updated!")
+                
+                
+                return true
+            }
+        } catch{
+            fatalError("Error is retriving Speaker items")
         }
+        
+        return false
     }
     
     func getSessionsForDay(day: Int) -> [SessionObj] {

@@ -18,6 +18,7 @@ class SessionsViewModel {
     
     let prefs = UserDefaults.standard
     let favKey = "favoriteSessions"
+    let updateKey = "serverUpdate"
     var currentDay: Day = .Tuesday //default
     
     init(rest: RestController, coreData: CoreDataController) {
@@ -30,7 +31,13 @@ class SessionsViewModel {
         currentDay = day
         self.sessions = self.coreData.getSessionsForDay(day: (day.rawValue-1)) //start index at 0
         
-        if sessions.count == 0 && !loadingSessions {
+        
+        let needToLoad: Bool = (sessions.count == 0 && !loadingSessions)
+        
+        let dateRefreshed = self.getLastUpdateFromServer()
+        let needToRefresh: Bool = (dateRefreshed == nil || numOfDays(first: dateRefreshed!, second: Date()) > 0)
+        
+        if needToLoad || needToRefresh {
             self.loadingSessions = true
             requestSessions()
         }
@@ -50,7 +57,8 @@ class SessionsViewModel {
                 
                 self.sessions = self.coreData.getSessionsForDay(day: (self.currentDay.rawValue-1)) //start index at 0
                 
-
+                self.setLastUpdateFromServer()
+                
                 //send notification to reload table
                 NotificationCenter.default.post(name: NotificationName.sessionsLoaded, object: nil)
 
@@ -61,6 +69,7 @@ class SessionsViewModel {
             
         })
     }
+    
     
     func numberOfRowsInSection(section: Int) -> Int {
         return sessions.count
@@ -76,6 +85,27 @@ class SessionsViewModel {
     func getSpeakersForSessions(id: String) -> [SpeakerThinJSON] {
         
         return self.coreData.getSpeakersForSession(id: id)
+    }
+    
+    func numOfDays(first: Date, second: Date) -> Int {
+        let calendar = Calendar.current
+        
+        // Replace the hour (time) of both dates with 00:00
+        let date1 = calendar.startOfDay(for: first)
+        let date2 = calendar.startOfDay(for: second)
+        
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+
+        
+        return components.day ?? 5 //default needs to be more than 1
+    }
+    
+    func setLastUpdateFromServer() {
+        prefs.set(Date(), forKey: updateKey)
+    }
+    
+    func getLastUpdateFromServer() -> Date? {
+        return prefs.object(forKey: updateKey) as? Date ?? nil
     }
     
     func favoriteSession(id: String, isFavorited: Bool) {
