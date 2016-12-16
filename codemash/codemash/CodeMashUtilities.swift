@@ -88,6 +88,22 @@ func getTimeFromString(startDate: String?, endDate: String?) -> String {
     // return (date.components(separatedBy: "T")[1] as? String)!
 }
 
+func getDayFromString(date: String?) -> String {
+    
+    if date == nil {
+        return "N/A"
+    }
+    
+    let dateForm = DateFormatter()
+    dateForm.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"
+    
+    let start = dateForm.date(from: date!)
+    
+    dateForm.dateFormat = "EEEE"
+    return "\(dateForm.string(from: start!)) "
+    
+}
+
 func favoriteSession(id: Int, isFavorited: Bool) {
     var favorites: [Int] = prefs.array(forKey: favKey) as? [Int] ?? []
     
@@ -95,36 +111,21 @@ func favoriteSession(id: Int, isFavorited: Bool) {
         
         favorites.append(id)
     } else {
-        for var i in 0...favorites.count {
-            if favorites[i] == id {
-                favorites.remove(at: i)
-            }
-        }
+        favorites = favorites.filter({ $0 != id })
     }
     
     prefs.set(favorites, forKey: favKey)
 }
 
-func getFavorites() -> [SessionObj] {
-    let favorites: [String] = prefs.object(forKey: favKey) as? [String] ?? []
-    var sessions: [SessionObj] = []
-    for fav in favorites {
-        if let session = getSessionWithId(id: fav) {
-            sessions.append(session)
-        }
-    }
-    
-    return sessions
-}
 
 func getSessionWithId(id: String) -> SessionObj? {
     return coreDataUtil.getSessionWithId(id: id)
 }
 
-func isSessionFavorite(id: String) -> Bool {
-    let favorites = getFavorites()
+func isSessionFavorite(id: Int) -> Bool {
+    let favorites = prefs.array(forKey: favKey) as? [Int] ?? []
     for fav in favorites {
-        if "\(fav.sessionId!)" == id {
+        if fav == id {
             return true
         }
     }

@@ -144,7 +144,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
             cell?.timeLabel.text = getTimeFromString(startDate: session?.startTime, endDate: session?.endTime)
             
             if let id = session?.sessionId {
-                cell?.favoriteButton.isSelected = isSessionFavorite(id: "\(id)")
+                cell?.favoriteButton.isSelected = isSessionFavorite(id: Int(id))
             }
             
             if session?.sessionType != "Kidz Mash" {

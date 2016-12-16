@@ -168,10 +168,10 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
             
             cell?.roomLabel.text = roomString
-            cell?.timeLabel.text = getTimeFromString(startDate: session.startTime, endDate: session.endTime)
+            cell?.timeLabel.text = getDayFromString(date: session.startTime)+getTimeFromString(startDate: session.startTime, endDate: session.endTime)
             
             if let id = session.sessionId {
-                cell?.favoriteButton.isSelected = isSessionFavorite(id: "\(id)")
+                cell?.favoriteButton.isSelected = isSessionFavorite(id: Int(id))
             }
             
             if session.sessionType != "Kidz Mash" {
