@@ -19,6 +19,7 @@ class SpeakersViewModel {
     var loadingSpeakers = false
     
     let prefs = UserDefaults.standard
+    let favKey = "favoriteSessions"
     let updateKey = "speakerServerUpdate"
 
     init(rest: RestController, coreData: CoreDataController) {
@@ -113,9 +114,16 @@ class SpeakersViewModel {
     }
     
     func getSessionsForSpeaker(id: String) -> [SessionObj] {
-        return []
-        //return self.coreData.getSessionsForSpeaker(id: id)
+        return self.coreData.getSessionsForSpeaker(id: id)
     }
+    
+    func favoriteSession(id: String, isFavorited: Bool) {
+        var favorites = prefs.array(forKey: favKey) ?? []
+        favorites.append(id)
+        
+        prefs.set(favorites, forKey: favKey)
+    }
+
     
     func filterSpeakers(text: String)
     {

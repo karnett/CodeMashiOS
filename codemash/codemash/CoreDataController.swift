@@ -261,6 +261,24 @@ class CoreDataController {
         return []
     }
     
+    func getSessionsForSpeaker(id: String) -> [SessionObj] {
+        let request = SessionObj.getSessionsForSpeaker(model: self.getModel(), id: id)
+        
+        do {
+            let context = self.getContext()
+            let results = try context.fetch(request) //(request) //as? [NSManagedObject]
+            
+            if results.count > 0 {
+                return  results
+            }
+        } catch{
+            fatalError("Error is retriving Speaker items")
+        }
+        
+        return []
+
+    }
+    
     func getSpeakersForSession(id: String) -> [SpeakerThinJSON] {
         let request = SessionObj.getSpeakersForSession(model: self.getModel(), id: id)
         do {

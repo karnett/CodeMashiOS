@@ -16,14 +16,6 @@ class SpeakerThinJSON: Mappable
     internal var lastName: String?
     internal var gravatarUrl: String?
     
-    /*
-     init(recipes: [Recipe], message: String, response: String)
-     {
-     self.recipes = recipes
-     self.message = message
-     self.response = response
-     }*/
-    
     required init?(map: Map) {
         mapping(map: map)
     }

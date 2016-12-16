@@ -127,7 +127,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -147,8 +147,56 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "sessionsCell") as? SessionTableViewCell
+        cell?.titleLabel.text = sessions[indexPath.row].title ?? "N/A"
+        let session = self.sessions[indexPath.row]
+        if session != nil {
+            cell?.titleLabel.text = session.title ?? ""
+            cell?.titleLabel.sizeToFit()
+            let rooms: [String] = session.rooms ?? []
+            
+            var roomString = ""
+            
+            
+            for index in 0..<rooms.count {
+                
+                roomString.append(rooms[index])
+                
+                if index != (rooms.count-1) {
+                    roomString.append(", ")
+                }
+            }
+            
+            
+            cell?.roomLabel.text = roomString
+            cell?.timeLabel.text = getTimeFromString(startDate: session.startTime, endDate: session.endTime)
+            
+            if let id = session.sessionId {
+                cell?.favoriteButton.isSelected = isSessionFavorite(id: "\(id)")
+            }
+            
+            if session.sessionType != "Kidz Mash" {
+                cell?.kidzmashIcon.isHidden = true
+            } else {
+                
+                cell?.kidzmashIcon.isHidden = false
+            }
+            
+        }
+        cell?.favoriteButton.tag = indexPath.row
+        cell?.favoriteButton.addTarget(self, action: #selector(favoriteBtnSelected), for: .touchUpInside)
+        
         
         return cell!
+    }
+    
+    func favoriteBtnSelected(sender: UIButton) {
+        let row = sender.tag
+        print("Favorited item at: \(row)")
+        let session = self.sessions[row]
+        if let id = session.sessionId {
+            favoriteSession(id: Int(id), isFavorited: sender.isSelected)
+            sender.isSelected = !sender.isSelected
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -159,7 +207,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if indexPath.section == 0 {
             return UITableViewAutomaticDimension
         }
-        return 70.0
+        return 100.0
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let padding: CGFloat = 10.0

@@ -106,7 +106,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
             
             let detail = segue.destination as? SessionDetailsViewController
             detail?.session = session!
-            detail?.timeString = self.viewModel.getTimeFromString(startDate: session!.startTime, endDate: session!.endTime)
+            detail?.timeString = getTimeFromString(startDate: session!.startTime, endDate: session!.endTime)
         }
     }
     
@@ -141,10 +141,10 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
             
             
             cell?.roomLabel.text = roomString
-            cell?.timeLabel.text =  viewModel.getTimeFromString(startDate: session?.startTime, endDate: session?.endTime)
+            cell?.timeLabel.text = getTimeFromString(startDate: session?.startTime, endDate: session?.endTime)
             
             if let id = session?.sessionId {
-                cell?.favoriteButton.isSelected = self.viewModel.isSessionFavorite(id: "\(id)")
+                cell?.favoriteButton.isSelected = isSessionFavorite(id: "\(id)")
             }
             
             if session?.sessionType != "Kidz Mash" {
@@ -264,7 +264,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         print("Favorited item at: \(row)")
         let session = viewModel.getSessionAtIndex(row: row)
         if let id = session?.sessionId {
-            self.viewModel.favoriteSession(id: "\(id)", isFavorited: sender.isSelected)
+            favoriteSession(id: Int(id), isFavorited: sender.isSelected)
             sender.isSelected = !sender.isSelected
         }
     }

@@ -10,6 +10,9 @@ import UIKit
 import Foundation
 
 
+let prefs = UserDefaults.standard
+let favKey = "favoriteSessions"
+let coreDataUtil = CoreDataController()
 
 extension UIColor {
     public static func cmTeal() -> UIColor {
@@ -59,3 +62,72 @@ func hexStringToUIColor (hex:String) -> UIColor {
         alpha: CGFloat(1.0)
     )
 }
+
+func getTimeFromString(startDate: String?, endDate: String?) -> String {
+    
+    if startDate == nil {
+        return "N/A"
+    }
+    
+    let dateForm = DateFormatter()
+    dateForm.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"
+    
+    let start = dateForm.date(from: startDate!)
+    
+    if endDate == nil {
+        dateForm.dateFormat = "hh:mm a"
+        return "\n\(dateForm.string(from: start!))"
+        
+    }
+    
+    let end = dateForm.date(from: endDate!)
+    
+    dateForm.dateFormat = "hh:mm a"
+    return "\(dateForm.string(from: start!))\nto \(dateForm.string(from: end!))"
+    
+    // return (date.components(separatedBy: "T")[1] as? String)!
+}
+
+func favoriteSession(id: Int, isFavorited: Bool) {
+    var favorites: [Int] = prefs.array(forKey: favKey) as? [Int] ?? []
+    
+    if !isFavorited {
+        
+        favorites.append(id)
+    } else {
+        for var i in 0...favorites.count {
+            if favorites[i] == id {
+                favorites.remove(at: i)
+            }
+        }
+    }
+    
+    prefs.set(favorites, forKey: favKey)
+}
+
+func getFavorites() -> [SessionObj] {
+    let favorites: [String] = prefs.object(forKey: favKey) as? [String] ?? []
+    var sessions: [SessionObj] = []
+    for fav in favorites {
+        if let session = getSessionWithId(id: fav) {
+            sessions.append(session)
+        }
+    }
+    
+    return sessions
+}
+
+func getSessionWithId(id: String) -> SessionObj? {
+    return coreDataUtil.getSessionWithId(id: id)
+}
+
+func isSessionFavorite(id: String) -> Bool {
+    let favorites = getFavorites()
+    for fav in favorites {
+        if "\(fav.sessionId!)" == id {
+            return true
+        }
+    }
+    return false
+}
+

@@ -14,6 +14,16 @@ class SessionObj: NSManagedObject {
         return model.fetchRequestTemplate(forName: "GetSessions")! as! NSFetchRequest<SessionObj>
     }
     
+    
+    @nonobjc public class func getSessionsForSpeaker(model: NSManagedObjectModel, id: String) -> NSFetchRequest<SessionObj> {
+        let fetchRequest = NSFetchRequest<SessionObj>(entityName: "SessionModel")
+        fetchRequest.predicate = NSPredicate(format: "speakers contains[cd] %@", id)
+        
+        return fetchRequest
+    }
+
+    
+    
     @nonobjc public class func getSpeakersForSession(model: NSManagedObjectModel, id: String) -> NSFetchRequest<SessionObj> {
         let fetchRequest = NSFetchRequest<SessionObj>(entityName: "SessionModel")
        // fetchRequest.predicate = NSPredicate(format: "speakerId == %@", id)
