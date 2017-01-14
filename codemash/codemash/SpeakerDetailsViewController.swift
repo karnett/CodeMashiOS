@@ -92,17 +92,22 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         self.twitterBtn.tintColor = UIColor.white
         self.linkedinBtn.tintColor = UIColor.white
         self.blogBtn.tintColor = UIColor.white
-        
-        
-        
-        
+     
     }
     
     func loadSpeakerView() {
         let url = "https:"+(self.speaker?.gravatarUrl ?? "")
         self.profileImage.af_setImage(withURL: URL(string: url)!)
         self.backgroundImage.af_setImage(withURL: URL(string: url)!)
-        self.nameLabel.text = (speaker?.firstName)!+" "+(speaker?.lastName)!
+        
+        if speaker?.firstName  == nil {
+            self.nameLabel.text = speaker?.lastName
+            
+        } else {
+            self.nameLabel.text = (speaker?.firstName ?? "") + " " + (speaker?.lastName ?? "")
+            
+        }
+        
         
         if speaker?.blogUrl == nil || speaker?.blogUrl == "" {
             self.blogBtn.isEnabled = false
