@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2657" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SessionModel" representedClassName=".SessionObj" syncable="YES">
         <attribute name="abstract" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,6 +24,7 @@
         <attribute name="speakerId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitterUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <fetchRequest name="GetOldSessions" entity="SessionModel" predicateString="startTime CONTAINS &quot;2017&quot; OR startTime CONTAINS &quot;2016&quot; OR startTime CONTAINS &quot;2015&quot;"/>
     <fetchRequest name="GetSessions" entity="SessionModel" predicateString="sessionId != 0"/>
     <fetchRequest name="GetSpeakers" entity="SpeakerModel" predicateString="speakerId != 0"/>
     <elements>

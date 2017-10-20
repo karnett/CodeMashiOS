@@ -54,6 +54,5 @@ class RestController {
                     completionHandler(Result.failure(error))
             }
         })
-
     }
 }

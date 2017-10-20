@@ -91,7 +91,7 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let number = viewModel.numberOfRowsInSection(section: section)
-        self.updateLoading(start: number == 0)
+        self.updateLoading(number: number)
        
         return  number
     }
@@ -112,6 +112,9 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell!
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView.init(frame: CGRect.zero)
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedIndex = indexPath
@@ -127,18 +130,24 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
             let sessions = self.viewModel.getSessionsForSpeaker(id: (speaker?.speakerId)!)
             detail?.speaker = speaker
             detail?.sessions = sessions
-            
         }
     }
     
-    func updateLoading(start: Bool) {
-        if start {
+    func updateLoading(number: Int) {
+        let isLoading = self.viewModel.loadingSpeakers
+        if  isLoading {
+            //Data is loading
             self.activityIndicator.startAnimating()
+            self.loadingLabel.text = "Collecting our minions..."
+            self.loadingLabel.isHidden = false
+        } else if !isLoading && number == 0 {
+            //No data to show
+            self.activityIndicator.stopAnimating()
+            self.loadingLabel.text = "No speakers to show.\nCheck back closer to the event."
+            self.loadingLabel.isHidden = false
         } else {
             self.activityIndicator.stopAnimating()
+            self.loadingLabel.isHidden = true
         }
-        self.loadingLabel.isHidden = !start
     }
-    
 }
-

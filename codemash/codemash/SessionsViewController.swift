@@ -50,10 +50,19 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         viewModel = SessionsViewModel(rest: restController, coreData: coreDataController)
+        viewModel.checkForOldEntries()
         viewModel.loadSessionsForDay(day: .Tuesday)
         
         styleBtns()
         selectedDay(day: Day.Tuesday)
+        
+        let radius = self.scrollView.frame.size.height/2
+
+        self.scrollView.layer.cornerRadius = radius
+        
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, radius, 0, radius)
+            
+            
         self.scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
         
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -114,7 +123,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let number = viewModel.numberOfRowsInSection(section: section)
-        self.updateLoading(start: number == 0)
+        self.updateLoading(number: number)
         
         return number
     }
@@ -171,6 +180,10 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         label.textColor = UIColor.white
         view.addSubview(label)
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView.init(frame: CGRect.zero)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -272,16 +285,26 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func filterBtnPressed(_ sender: AnyObject) {
         print("Show Filters")
+        performSegue(withIdentifier: "filterView", sender: self)
+        
     }
     
-    func updateLoading(start: Bool) {
-        if start {
+    func updateLoading(number: Int) {
+        let isLoading = self.viewModel.loadingSessions
+        if  isLoading {
+            //Data is loading
             self.activityIndicator.startAnimating()
+            self.loadingLabel.text = "Gathering bits and bytes..."
+            self.loadingLabel.isHidden = false
+        } else if !isLoading && number == 0 {
+            //No data to show
+            self.activityIndicator.stopAnimating()
+            self.loadingLabel.text = "No sessions to show.\nCheck back closer to the event."
+            self.loadingLabel.isHidden = false
         } else {
             self.activityIndicator.stopAnimating()
+            self.loadingLabel.isHidden = true
         }
-        self.loadingLabel.isHidden = !start
     }
-
 }
 

@@ -26,18 +26,25 @@ class SessionsViewModel {
         self.coreData = coreData
     }
     
+    func checkForOldEntries() {
+        //make sure previous years data is gone.
+        let oldEntries = self.coreData.getOldSessions()
+        //if there are old entries - clear out old data and get new speakers and sessions. Leave favorites alone for now.
+        if oldEntries.count > 1 {
+            self.clearLastUpdateFromServer()
+            self.coreData.clearTables()
+         }
+    }
+    
     func loadSessionsForDay(day: Day) {
         
         currentDay = day
         self.sessions = self.coreData.getSessionsForDay(day: (day.rawValue-1)) //start index at 0
         
-        
-        let needToLoad: Bool = (sessions.count == 0 && !loadingSessions)
-        
         let dateRefreshed = self.getLastUpdateFromServer()
         let needToRefresh: Bool = (dateRefreshed == nil || numOfDays(first: dateRefreshed!, second: Date()) > 0)
         
-        if needToLoad || needToRefresh {
+        if needToRefresh {
             self.loadingSessions = true
             requestSessions()
         }
@@ -98,6 +105,10 @@ class SessionsViewModel {
 
         
         return components.day ?? 5 //default needs to be more than 1
+    }
+    
+    func clearLastUpdateFromServer() {
+        prefs.set(nil, forKey: updateKey)
     }
     
     func setLastUpdateFromServer() {

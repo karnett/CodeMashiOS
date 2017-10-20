@@ -44,31 +44,24 @@ class SpeakersViewModel {
     func requestSpeakers() {
         //move to core data
         self.rest.loadSpeakers(completionHandler: { result in
-            
-            switch result {
-                
-            case .success(let data):
-                
-                for entry in data {
-                    self.coreData.saveSpeaker(json: entry)
-                }
-                self.setLastUpdateFromServer()
-                
-                self.speakers = self.coreData.getSpeakers()
-                
-                //send notification to reload table
-                NotificationCenter.default.post(name: NotificationName.speakersLoaded, object: nil)
-
-            case .failure(let error):
-                //alert
-                print(error)
-            }
-            
-            
-            
             self.loadingSpeakers = false
-            
-            
+            switch result {
+                case .success(let data):
+                
+                    for entry in data {
+                        self.coreData.saveSpeaker(json: entry)
+                    }
+                    self.setLastUpdateFromServer()
+                    
+                    self.speakers = self.coreData.getSpeakers()
+                    
+                    //send notification to reload table
+                    NotificationCenter.default.post(name: NotificationName.speakersLoaded, object: nil)
+
+                case .failure(let error):
+                    //alert
+                    print(error)
+            }
         })
     }
     

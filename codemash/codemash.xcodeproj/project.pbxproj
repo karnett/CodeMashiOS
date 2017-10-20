@@ -19,6 +19,7 @@
 		BA61A0C81DBBCFB300E8FBB8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61A0C71DBBCFB300E8FBB8 /* NotificationName.swift */; };
 		BA61A0CA1DBC0DFA00E8FBB8 /* BiographyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61A0C91DBC0DFA00E8FBB8 /* BiographyTableViewCell.swift */; };
 		BA61A0CC1DBC386000E8FBB8 /* SpeakerWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61A0CB1DBC386000E8FBB8 /* SpeakerWebViewController.swift */; };
+		BA7C332A1F9A3F900033D399 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C33291F9A3F900033D399 /* Tag.swift */; };
 		BA8D4D141DA13BA7007CBE84 /* RestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D131DA13BA7007CBE84 /* RestController.swift */; };
 		BA8D4D161DA13E89007CBE84 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D151DA13E89007CBE84 /* MapViewController.swift */; };
 		BA8D4D181DA13E92007CBE84 /* SpeakersVeiwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D4D171DA13E92007CBE84 /* SpeakersVeiwController.swift */; };
@@ -70,6 +71,7 @@
 		BA61A0C71DBBCFB300E8FBB8 /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		BA61A0C91DBC0DFA00E8FBB8 /* BiographyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiographyTableViewCell.swift; sourceTree = "<group>"; };
 		BA61A0CB1DBC386000E8FBB8 /* SpeakerWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerWebViewController.swift; sourceTree = "<group>"; };
+		BA7C33291F9A3F900033D399 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		BA8D4D131DA13BA7007CBE84 /* RestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestController.swift; sourceTree = "<group>"; };
 		BA8D4D151DA13E89007CBE84 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		BA8D4D171DA13E92007CBE84 /* SpeakersVeiwController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersVeiwController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				BA8D4D131DA13BA7007CBE84 /* RestController.swift */,
 				BA1D3E291DB84032001D2533 /* CoreDataController.swift */,
 				BA61A0C71DBBCFB300E8FBB8 /* NotificationName.swift */,
+				BA7C33291F9A3F900033D399 /* Tag.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				BAAE658C1DA93EC600DF116C /* SpeakerThinJSON.swift in Sources */,
 				BA14ED081DB2E54200A6532C /* SpeakerTableViewCell.swift in Sources */,
 				BA1D3E2D1DB8610A001D2533 /* SpeakerObj.swift in Sources */,
+				BA7C332A1F9A3F900033D399 /* Tag.swift in Sources */,
 				BAC338C91D8F0BAC00D368BF /* SessionsViewController.swift in Sources */,
 				BA8D4D241DA93953007CBE84 /* SessionsViewModel.swift in Sources */,
 				BA8D4D181DA13E92007CBE84 /* SpeakersVeiwController.swift in Sources */,

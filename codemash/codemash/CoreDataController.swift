@@ -12,6 +12,25 @@ import ObjectMapper
 import CoreData
 
 class CoreDataController {
+    
+    func clearTables() {
+        
+        var fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "SessionModel")
+        var request = NSBatchDeleteRequest(fetchRequest: fetch)
+        do {
+            let result = try self.getContext().execute(request)
+        } catch {
+            print("Error removing sessions")
+        }
+        
+        fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "SpeakerModel")
+        request = NSBatchDeleteRequest(fetchRequest: fetch)
+        do {
+            let result = try self.getContext().execute(request)
+        } catch {
+            print("Error removing speakers")
+        }
+    }
  
     func getSessions() -> [SessionObj]  {
         
@@ -21,8 +40,22 @@ class CoreDataController {
             let context = self.getContext()
             let results = try context.fetch(request) //(request) //as? [NSManagedObject]
             return results
-        } catch{
-            fatalError("Error is retriving Session items")
+        } catch {
+            print("Error is retriving Session items")
+        }
+        
+        return []
+    }
+    
+    func getOldSessions() -> [SessionObj] {
+        let request = SessionObj.getOldSessionsRequest(model: self.getModel())
+        
+        do {
+            let context = self.getContext()
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("Error in retrieving Old Sessions")
         }
         
         return []
@@ -38,8 +71,8 @@ class CoreDataController {
             if results.count == 1 {
                 return results[0]
             }
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return nil
@@ -54,8 +87,8 @@ class CoreDataController {
             let context = self.getContext()
             let results = try context.fetch(request) //(request) //as? [NSManagedObject]
             return results
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return []
@@ -70,8 +103,8 @@ class CoreDataController {
             if results.count == 1 {
                 return results[0]
             }
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return nil
@@ -79,8 +112,6 @@ class CoreDataController {
     }
     
     func saveSession(json: SessionJSON) {
-        
-        
         let context = self.getContext()
         
         let exists = sessionExists(json: json) //if exists, it'll update, else insert
@@ -95,7 +126,7 @@ class CoreDataController {
             session.setValue(json.title, forKey: "title")
             session.setValue(json.abstract, forKey: "abstract")
             session.setValue(json.sessionType, forKey: "sessionType")
-            // session.setValue(json.tags, forKey: "tags")
+            session.setValue(json.tags, forKey: "tags")
             session.setValue(json.category, forKey: "category")
             
             session.setValue(getDayIntForDate(time: json.startTime!), forKey: "day")
@@ -109,12 +140,8 @@ class CoreDataController {
                 print("saved!")
             } catch let error as NSError  {
                 print("Could not save \(error), \(error.userInfo)")
-            } catch {
-                
             }
         }
-        
-        
     }
     
     func sessionExists(json: SessionJSON) -> Bool {
@@ -153,8 +180,8 @@ class CoreDataController {
                 
                 return true
             }
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return false
@@ -175,8 +202,6 @@ class CoreDataController {
     }
     
     func saveSpeaker(json: SpeakerJSON) {
-        
-        
         let context = self.getContext()
         
         let exists = speakerExists(json: json) //if exists, udpated in method
@@ -193,9 +218,6 @@ class CoreDataController {
             speaker.setValue(json.twitter, forKey: "twitterUrl")
             speaker.setValue(json.github, forKey: "githubUrl")
             speaker.setValue(json.speakerId, forKey: "speakerId")
-            
-            
-            
             
             do {
                 try context.save()
@@ -239,8 +261,8 @@ class CoreDataController {
                 
                 return true
             }
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return false
@@ -254,8 +276,8 @@ class CoreDataController {
             
             
             return results
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return []
@@ -271,8 +293,8 @@ class CoreDataController {
             if results.count > 0 {
                 return  results
             }
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return []
@@ -288,8 +310,8 @@ class CoreDataController {
             if results.count == 1 {
                 return []
             }
-        } catch{
-            fatalError("Error is retriving Speaker items")
+        } catch {
+            print("Error is retriving Speaker items")
         }
         
         return []
