@@ -129,6 +129,17 @@ class SpeakersViewModel {
         return nil
     }
     
+    func getIndexForSpeaker(id: String) -> Int? {
+        var index = 0
+        for speaker in self.speakers {
+            if speaker.speakerId == id {
+                return index
+            }
+            index += 1
+        }
+        return nil
+    }
+    
     func getSessionsForSpeaker(id: String) -> [SessionObj] {
         return self.coreData.getSessionsForSpeaker(id: id)
     }

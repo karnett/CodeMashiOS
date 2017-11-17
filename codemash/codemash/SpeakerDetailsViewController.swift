@@ -69,6 +69,13 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(selectSpeaker), name: NotificationName.speakerSelected, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NotificationName.speakerSelected, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,6 +100,15 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         self.linkedinBtn.tintColor = UIColor.white
         self.blogBtn.tintColor = UIColor.white
      
+    }
+    
+    func selectSpeaker(notification: NSNotification) {
+        NotificationCenter.default.removeObserver(self, name: NotificationName.speakerSelected, object: nil)
+        self.navigationController?.popToRootViewController(animated: false)
+        
+        self.delay(seconds: 0.5, completionHandler: {
+            NotificationCenter.default.post(name: NotificationName.speakerSelected, object: notification.object as? String)
+        })
     }
     
     func loadSpeakerView() {

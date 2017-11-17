@@ -117,7 +117,6 @@ func favoriteSession(id: Int, isFavorited: Bool) {
     prefs.set(favorites, forKey: favKey)
 }
 
-
 func getSessionWithId(id: String) -> SessionObj? {
     return coreDataUtil.getSessionWithId(id: id)
 }

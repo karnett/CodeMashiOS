@@ -131,6 +131,12 @@ class SessionDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //jump to speaker details
+        self.navigationController?.tabBarController?.selectedIndex = 1
+        //send notification
+        
+        let speaker = self.speakers[indexPath.row]
+        NotificationCenter.default.post(name: NotificationName.speakerSelected, object: speaker.speakerId)
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

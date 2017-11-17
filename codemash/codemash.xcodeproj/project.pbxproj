@@ -39,6 +39,7 @@
 		BAC338DC1D8F0BAC00D368BF /* codemashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338DB1D8F0BAC00D368BF /* codemashTests.swift */; };
 		BAC338E71D8F0BAC00D368BF /* codemashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338E61D8F0BAC00D368BF /* codemashUITests.swift */; };
 		BAE379DF1FB90747007B5B9D /* old_data.json in Resources */ = {isa = PBXBuildFile; fileRef = BAE379DE1FB902AB007B5B9D /* old_data.json */; };
+		BAE379E21FBF6653007B5B9D /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE379E11FBF6653007B5B9D /* UIViewController+Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		BAC338E81D8F0BAC00D368BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAE379DE1FB902AB007B5B9D /* old_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = old_data.json; sourceTree = "<group>"; };
 		BAE379E01FBF4FFB007B5B9D /* old_data_speakers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = old_data_speakers.json; sourceTree = "<group>"; };
+		BAE379E11FBF6653007B5B9D /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		BF39089E023F940929B5AE86 /* Pods-codemash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codemash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-codemash/Pods-codemash.debug.xcconfig"; sourceTree = "<group>"; };
 		BF60554529D0296DD00EEC88 /* Pods-codemash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codemash.release.xcconfig"; path = "Pods/Target Support Files/Pods-codemash/Pods-codemash.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,6 +247,7 @@
 				BA8D4D111DA13B78007CBE84 /* Data */,
 				BAC338C61D8F0BAC00D368BF /* AppDelegate.swift */,
 				BA8D4D1B1DA14442007CBE84 /* CodeMashUtilities.swift */,
+				BAE379E11FBF6653007B5B9D /* UIViewController+Utilities.swift */,
 				BAC338CA1D8F0BAC00D368BF /* Main.storyboard */,
 				BAC338CD1D8F0BAC00D368BF /* Assets.xcassets */,
 				BAC338CF1D8F0BAC00D368BF /* LaunchScreen.storyboard */,
@@ -470,6 +473,7 @@
 				BA14ED081DB2E54200A6532C /* SpeakerTableViewCell.swift in Sources */,
 				BA1D3E2D1DB8610A001D2533 /* SpeakerObj.swift in Sources */,
 				BA7C332A1F9A3F900033D399 /* Tag.swift in Sources */,
+				BAE379E21FBF6653007B5B9D /* UIViewController+Utilities.swift in Sources */,
 				BAC338C91D8F0BAC00D368BF /* SessionsViewController.swift in Sources */,
 				BA8D4D241DA93953007CBE84 /* SessionsViewModel.swift in Sources */,
 				BA8D4D181DA13E92007CBE84 /* SpeakersVeiwController.swift in Sources */,

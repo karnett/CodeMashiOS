@@ -64,13 +64,16 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(speakersLoaded), name: NotificationName.speakersLoaded, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(selectSpeaker), name: NotificationName.speakerSelected, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         // Stop listening notification
-        NotificationCenter.default.removeObserver(self, name: NotificationName.speakersLoaded, object: nil);
+        NotificationCenter.default.removeObserver(self, name: NotificationName.speakersLoaded, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: NotificationName.speakerSelected, object: nil)
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -88,6 +91,19 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.reloadData()
     }
     
+    func selectSpeaker(notification: NSNotification) {
+        
+        //find matching speaker
+        if let id = notification.object as? String, let index = self.viewModel.getIndexForSpeaker(id: id)
+        {
+            //programmatically select row
+            self.selectedIndex = IndexPath.init(row: index, section: 0)
+            self.performSegue(withIdentifier: detailSegue, sender: self)
+            return
+        }
+        
+        self.sendAlert(title: "Unable to find the selected speaker in this list.")
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let number = viewModel.numberOfRowsInSection(section: section)
