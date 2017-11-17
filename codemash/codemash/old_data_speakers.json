@@ -1,0 +1,45 @@
+ [
+  {
+  "Id":"5c2198a7-9081-4686-9a1b-840d758e405e",
+  "FirstName":"Indu",
+  "LastName":"Alagarsamy",
+  "Biography":"Indu Alagarsamy has been programming for over 15 years. \r\nShe is currently part of the development team at Particular Software, the makers of NServiceBus, practicing her passion. \r\n\r\nIndu is also passionate about diversity and inclusiveness in the tech industry. When not programming, she is either rock climbing in sunny Southern California or spending time with her kids!",
+  "GravatarUrl":"//www.gravatar.com/avatar/5dd3165fd408bfad86466226d71b53cc",
+  "TwitterLink":"https://twitter.com/indu_alagarsamy",
+  "GitHubLink":"https://github.com/indualagarsamy",
+  "LinkedInProfile":"https://www.linkedin.com/in/indualagarsamy/",
+  "BlogUrl":null,
+  "SessionIds":[
+                "7289"
+                ]
+  },
+  {
+  "Id":"84f4d5b5-4e54-4f13-8939-1434551b46be",
+  "FirstName":"Christina",
+  "LastName":"Aldan",
+  "Biography":"Christina Aldan is a TEDx Speaker and Entrepreninja whose company, LG Designs, offers small and micro businesses brand consulting and creative content for everyday media.  With over a decade of experience in digital advertising Christina is highly regarded for her approach to business, partnering with clients to find unique strategies that ensure their advertising goals are met.\r\n",
+  "GravatarUrl":"//www.gravatar.com/avatar/ce9356a177df8b59c28d72c7dc2d64be",
+  "TwitterLink":"https://twitter.com/luckgirliegirl",
+  "GitHubLink":"",
+  "LinkedInProfile":"https://www.linkedin.com/in/luckygirl",
+  "BlogUrl":"http://iamagoodmix.com/blog",
+  "SessionIds":[
+                "7383",
+                "7830"
+                ]
+  },
+  {
+  "Id":"118b44db-ead1-4021-81c9-26e76e665444",
+  "FirstName":"Dale",
+  "LastName":"Alleshouse",
+  "Biography":"Dale Alleshouse is a 20+ year veteran developer with a passion for technology and a penchant for keeping up with software trends. He has extensive experience with full stack web development using C#, JavaScript, TypeScript, HTML, CSS, SQL, and NoSql. He also likes to dabble with C++, C, F#, and a few different LISP variants.\r\nDale recently accepted a Software Engineer position with the Software Engineering Institute (SEI) at Carnegie Mellon University. SEI is a federally funded research and development facility funded by the Department of Defense.\r\nIn his free time, he’s involved in several local user groups where he shares his experiences on topics such as Docker, Kubernetes, AngularJS, Test Driven Development, and Software Craftsmanship. He also actively contributes to the open source community. When not programming, you can find him in the gym lifting heavy things and generally being a menace.",
+  "GravatarUrl":"//www.gravatar.com/avatar/8649e5e74ec8588fb59b913ac01f2ade",
+  "TwitterLink":"https://twitter.com/humpbackfreak",
+  "GitHubLink":"https://github.com/dalealleshouse",
+  "LinkedInProfile":null,
+  "BlogUrl":"http://www.hideoushumpbackfreak.com/",
+  "SessionIds":[
+                "6938"
+                ]
+  }
+  ]

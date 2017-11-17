@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class SpeakersViewModel {
     var rest: RestController!
@@ -38,6 +39,28 @@ class SpeakersViewModel {
         if needToLoad || needToRefresh {
             loadingSpeakers = true
             requestSpeakers()
+        }
+    }
+    
+    func loadSpeakersFromFile() {
+        if let path = Bundle.main.path(forResource: "old_data_speakers", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let speakers = Mapper<SpeakerJSON>().mapArray(JSONObject: json)!
+                for entry in speakers {
+                    self.coreData.saveSpeaker(json: entry)
+                }
+                self.setLastUpdateFromServer()
+                
+                self.speakers = self.coreData.getSpeakers()
+                
+                //send notification to reload table
+                NotificationCenter.default.post(name: NotificationName.speakersLoaded, object: nil)
+                
+            } catch {
+                // handle error
+            }
         }
     }
     

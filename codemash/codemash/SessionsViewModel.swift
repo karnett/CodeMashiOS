@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class SessionsViewModel {
     var rest: RestController!
@@ -45,12 +46,35 @@ class SessionsViewModel {
         let needToRefresh: Bool = (dateRefreshed == nil || numOfDays(first: dateRefreshed!, second: Date()) > 0)
         
         if needToRefresh {
-            self.loadingSessions = true
             requestSessions()
         }
     }
     
+    func loadSessionsFromFile() {
+        if let path = Bundle.main.path(forResource: "old_data", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let sessions = Mapper<SessionJSON>().mapArray(JSONObject: json)!
+                for entry in sessions {
+                    self.coreData.saveSession(json: entry)
+                }
+                
+                self.sessions = self.coreData.getSessionsForDay(day: (self.currentDay.rawValue-1)) //start index at 0
+                
+                self.setLastUpdateFromServer()
+                
+                //send notification to reload table
+                NotificationCenter.default.post(name: NotificationName.sessionsLoaded, object: nil)
+                
+            } catch {
+                // handle error
+            }
+        }
+    }
+    
     func requestSessions() {
+        self.loadingSessions = true
         self.rest.loadSessions(completionHandler: { result in
             self.loadingSessions = false
             switch result {

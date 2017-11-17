@@ -38,6 +38,7 @@
 		BAC338D11D8F0BAC00D368BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC338CF1D8F0BAC00D368BF /* LaunchScreen.storyboard */; };
 		BAC338DC1D8F0BAC00D368BF /* codemashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338DB1D8F0BAC00D368BF /* codemashTests.swift */; };
 		BAC338E71D8F0BAC00D368BF /* codemashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338E61D8F0BAC00D368BF /* codemashUITests.swift */; };
+		BAE379DF1FB90747007B5B9D /* old_data.json in Resources */ = {isa = PBXBuildFile; fileRef = BAE379DE1FB902AB007B5B9D /* old_data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		BAC338E21D8F0BAC00D368BF /* codemashUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = codemashUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAC338E61D8F0BAC00D368BF /* codemashUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = codemashUITests.swift; sourceTree = "<group>"; };
 		BAC338E81D8F0BAC00D368BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAE379DE1FB902AB007B5B9D /* old_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = old_data.json; sourceTree = "<group>"; };
+		BAE379E01FBF4FFB007B5B9D /* old_data_speakers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = old_data_speakers.json; sourceTree = "<group>"; };
 		BF39089E023F940929B5AE86 /* Pods-codemash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codemash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-codemash/Pods-codemash.debug.xcconfig"; sourceTree = "<group>"; };
 		BF60554529D0296DD00EEC88 /* Pods-codemash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codemash.release.xcconfig"; path = "Pods/Target Support Files/Pods-codemash/Pods-codemash.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,6 +248,8 @@
 				BAC338CA1D8F0BAC00D368BF /* Main.storyboard */,
 				BAC338CD1D8F0BAC00D368BF /* Assets.xcassets */,
 				BAC338CF1D8F0BAC00D368BF /* LaunchScreen.storyboard */,
+				BAE379E01FBF4FFB007B5B9D /* old_data_speakers.json */,
+				BAE379DE1FB902AB007B5B9D /* old_data.json */,
 				BAC338D21D8F0BAC00D368BF /* Info.plist */,
 			);
 			path = codemash;
@@ -382,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAC338D11D8F0BAC00D368BF /* LaunchScreen.storyboard in Resources */,
+				BAE379DF1FB90747007B5B9D /* old_data.json in Resources */,
 				BAC338CE1D8F0BAC00D368BF /* Assets.xcassets in Resources */,
 				BAC338CC1D8F0BAC00D368BF /* Main.storyboard in Resources */,
 			);

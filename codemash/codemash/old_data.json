@@ -1,0 +1,122 @@
+[  
+   {  
+      "Id":6938,
+      "SessionTime":"2017-01-10T09:30:00",
+      "SessionStartTime":"2017-01-10T09:30:00",
+      "SessionEndTime":"2017-01-10T10:00:00",
+      "Room":null,
+      "Rooms":null,
+      "Title":" JSON parsing in Swift just got a whole lot easier!",
+      "Abstract":"JSON is quickly becoming the de facto data exchange format on the web with more and more web services serving content in JSON format. In fact, with the growing popularity of NoSQL databases, content is even being stored as JSON. The ability to encode JSON to and from native language representations is quickly becoming integral to developing a web or mobile app. In this talk, we look at how we can accomplish this using Swift 4.\r\n\r\nSwift 4 was introduced in summer of 2017 and with it came Codables. Swift Codables greatly simplify the process of encoding and decoding from native swift objects to/from other representations , including JSON. Codables does away with the tedious JSON serialization /deserialization logic you probably had in place in earlier versions.  In this talk, we will introduce you to Codables and look at examples of how you can use it for JSON serialization.\r\n\r\nAnyone building apps using Swift 4 will benefit from this talk.",
+      "SessionType":"General Session",
+      "Tags":[  
+         "Mobile",
+         "Other"
+      ],
+      "Category":"Mobile",
+      "Speakers":[  
+         {  
+            "Id":"fd245182-1b3b-45ac-93f6-cac098581200",
+            "FirstName":"Priya",
+            "LastName":"Rajagopal",
+            "GravatarUrl":"//www.gravatar.com/avatar/01c9d267e78a30758e8ce4a8735833e5"
+         }
+      ]
+   },
+   {  
+      "Id":7830,
+      "SessionTime":"2017-01-11T10:00:00",
+      "SessionStartTime":"2017-01-11T10:00:00",
+      "SessionEndTime":"2017-01-11T11:00:00",
+      "Room":null,
+      "Rooms":null,
+      "Title":" See Your Data on the Network with Wireshark",
+      "Abstract":"Does your program send data over the network? When debugging, it is useful to know what data your program is sending and receiving. This presentation will explain basic networking, how to use WIreshark to see the data and how to use Wireshark Generic Descriptor to define custom protocols.\r\n\r\nIf your program sends data over the network, then you may someday need to know what it looks like on the network. When debugging, it is often useful to know exactly what data your program is sending and receiving. This presentation will give you a quick refresher (or fast introduction) to basic networking protocols, explain how to use WIreshark to see your data and how to use Wireshark Generic Descriptor to define you custom protocols.\r\n\r\n**Networking Refresher** A review of basic networking, standard protocols (IP, TCP, UDP, etc.) and how the networking model uses this layers to build messages.\r\n\r\n**Wireshark Overview and Demo** After an overview of how to use Wireshark, we will look at some of example data captures to practice using Wireshark, as a group and also in individual excercises.  We will also have examples and excercises to illustrate the lessons learned in the Networking Refresher.\r\n\r\n**Wireshark Generic Descriptor (WSGD)** If you have a custom protocol, you will need to define it so that Wireshark can display the data.  We will look at the three options for creating dissectors.  We will look at how to define a protocol using WSGD and how to configure Wireshark to use it.  We will look at examples of Wireshark displaying data in custom protocols and have excerses in creating disectors to display packets from an example custom protocol.\r\n",
+      "SessionType":"Pre-Compiler",
+      "Tags":[  
+         "Other"
+      ],
+      "Category":"Data (big/small/otherwise)",
+      "Speakers":[  
+         {  
+            "Id":"89a4ad22-2944-4af2-8932-107d3c3d734b",
+            "FirstName":"Wayne",
+            "LastName":"Goode",
+            "GravatarUrl":"//www.gravatar.com/avatar/8422f98a1f24f99ca5e55949845bcafa"
+         }
+      ]
+   },
+   {  
+      "Id":7383,
+      "SessionTime":"2017-01-12T10:00:00",
+      "SessionStartTime":"2017-01-12T10:00:00",
+      "SessionEndTime":"2017-01-12T11:00:00",
+      "Room":null,
+      "Rooms":null,
+      "Title":".NET IL: Into the Marianas Trench",
+      "Abstract":"Are you interested in writing compilers, targeting Web Assembly, finding security issues automatically, binary analysis, or understanding performance at a low level? While it’s always good to know how your language works, the benefits of understanding the intermediate language extend to metaprogramming and analysis across multiple source languages. Learning how to work with intermediate languages allows you to write programs which would seem unattainable otherwise. You will learn not only how IL works but how it compares with LLVM IR, Java Bytecode, and other intermediate representations. No mere “deep dive,” you’ll leave this talk really understanding how C# turns into microcode and how to use that information to do “impossible” things.",
+      "SessionType":"General Session",
+      "Tags":[  
+         ".NET",
+         "Other"
+      ],
+      "Category":"Architecture",
+      "Speakers":[  
+         {  
+            "Id":"a01d978d-3330-4384-b5c0-6b39d9b28d95",
+            "FirstName":"Craig",
+            "LastName":"Stuntz",
+            "GravatarUrl":"//www.gravatar.com/avatar/a45302e072f5c7cfd34d18328139ff66"
+         }
+      ]
+ },
+ {
+ "Id":73845,
+ "SessionTime":"2017-01-12T10:00:00",
+ "SessionStartTime":"2017-01-12T10:00:00",
+ "SessionEndTime":"2017-01-12T11:00:00",
+ "Room":null,
+ "Rooms":null,
+ "Title":".NET IL: Into the Marianas Trench",
+ "Abstract":"Are you interested in writing compilers, targeting Web Assembly, finding security issues automatically, binary analysis, or understanding performance at a low level? While it’s always good to know how your language works, the benefits of understanding the intermediate language extend to metaprogramming and analysis across multiple source languages. Learning how to work with intermediate languages allows you to write programs which would seem unattainable otherwise. You will learn not only how IL works but how it compares with LLVM IR, Java Bytecode, and other intermediate representations. No mere “deep dive,” you’ll leave this talk really understanding how C# turns into microcode and how to use that information to do “impossible” things.",
+ "SessionType":"General Session",
+ "Tags":[
+         ".NET",
+         "Other"
+         ],
+ "Category":"Architecture",
+ "Speakers":[
+             {
+             "Id":"a01d978d-3330-4384-b5c0-6b39d9b28d95",
+             "FirstName":"Craig",
+             "LastName":"Stuntz",
+             "GravatarUrl":"//www.gravatar.com/avatar/a45302e072f5c7cfd34d18328139ff66"
+             }
+             ]
+ },
+ {
+ "Id":73856,
+ "SessionTime":"2017-01-12T10:00:00",
+ "SessionStartTime":"2017-01-12T10:00:00",
+ "SessionEndTime":"2017-01-12T11:00:00",
+ "Room":null,
+ "Rooms":null,
+ "Title":".NET IL: Into the Marianas Trench",
+ "Abstract":"Are you interested in writing compilers, targeting Web Assembly, finding security issues automatically, binary analysis, or understanding performance at a low level? While it’s always good to know how your language works, the benefits of understanding the intermediate language extend to metaprogramming and analysis across multiple source languages. Learning how to work with intermediate languages allows you to write programs which would seem unattainable otherwise. You will learn not only how IL works but how it compares with LLVM IR, Java Bytecode, and other intermediate representations. No mere “deep dive,” you’ll leave this talk really understanding how C# turns into microcode and how to use that information to do “impossible” things.",
+ "SessionType":"General Session",
+ "Tags":[
+         ".NET",
+         "Other"
+         ],
+ "Category":"Architecture",
+ "Speakers":[
+             {
+             "Id":"a01d978d-3330-4384-b5c0-6b39d9b28d95",
+             "FirstName":"Craig",
+             "LastName":"Stuntz",
+             "GravatarUrl":"//www.gravatar.com/avatar/a45302e072f5c7cfd34d18328139ff66"
+             }
+             ]
+ }
+]
+   

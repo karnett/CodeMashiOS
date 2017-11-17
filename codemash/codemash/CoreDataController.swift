@@ -189,13 +189,13 @@ class CoreDataController {
     
     func getDayIntForDate(time: String) -> Int {
         
-        if time.contains("2017-01-10") {
+        if time.contains("2018-01-09") {
             return 0
-        } else if time.contains("2017-01-11") {
+        } else if time.contains("2018-01-10") {
             return 1
-        } else if time.contains("2017-01-12") {
+        } else if time.contains("2018-01-11") {
             return 2
-        } else if time.contains("2017-01-13") {
+        } else if time.contains("2018-01-12") {
             return 3
         }
         return 0
