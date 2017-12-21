@@ -40,6 +40,9 @@
 		BAC338E71D8F0BAC00D368BF /* codemashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC338E61D8F0BAC00D368BF /* codemashUITests.swift */; };
 		BAE379DF1FB90747007B5B9D /* old_data.json in Resources */ = {isa = PBXBuildFile; fileRef = BAE379DE1FB902AB007B5B9D /* old_data.json */; };
 		BAE379E21FBF6653007B5B9D /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE379E11FBF6653007B5B9D /* UIViewController+Utilities.swift */; };
+		BAF7E6DE1FE3635A005C841C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7E6DD1FE3635A005C841C /* FilterViewController.swift */; };
+		BAF7E6E01FE3658A005C841C /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7E6DF1FE3658A005C841C /* FiltersViewModel.swift */; };
+		BAF7E6E21FE36C10005C841C /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7E6E11FE36C10005C841C /* FilterTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,9 @@
 		BAE379DE1FB902AB007B5B9D /* old_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = old_data.json; sourceTree = "<group>"; };
 		BAE379E01FBF4FFB007B5B9D /* old_data_speakers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = old_data_speakers.json; sourceTree = "<group>"; };
 		BAE379E11FBF6653007B5B9D /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
+		BAF7E6DD1FE3635A005C841C /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		BAF7E6DF1FE3658A005C841C /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
+		BAF7E6E11FE36C10005C841C /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		BF39089E023F940929B5AE86 /* Pods-codemash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codemash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-codemash/Pods-codemash.debug.xcconfig"; sourceTree = "<group>"; };
 		BF60554529D0296DD00EEC88 /* Pods-codemash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-codemash.release.xcconfig"; path = "Pods/Target Support Files/Pods-codemash/Pods-codemash.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +175,7 @@
 				BAAE658D1DA9E1BE00DF116C /* SpeakerDetailsViewController.swift */,
 				BA61A0CB1DBC386000E8FBB8 /* SpeakerWebViewController.swift */,
 				BA8D4D191DA13EA4007CBE84 /* AboutViewController.swift */,
+				BAF7E6DD1FE3635A005C841C /* FilterViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -202,6 +209,7 @@
 				BA8D4D201DA93440007CBE84 /* SessionTableViewCell.swift */,
 				BA14ED071DB2E54200A6532C /* SpeakerTableViewCell.swift */,
 				BA61A0C91DBC0DFA00E8FBB8 /* BiographyTableViewCell.swift */,
+				BAF7E6E11FE36C10005C841C /* FilterTableViewCell.swift */,
 				BA16884D1DFA39D0000E7E1F /* KAButton.swift */,
 			);
 			name = Views;
@@ -212,6 +220,7 @@
 			children = (
 				BA8D4D231DA93953007CBE84 /* SessionsViewModel.swift */,
 				BA14ED051DB2E37F00A6532C /* SpeakersViewModel.swift */,
+				BAF7E6DF1FE3658A005C841C /* FiltersViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -467,6 +476,7 @@
 			files = (
 				BA8D4D211DA93440007CBE84 /* SessionTableViewCell.swift in Sources */,
 				BA16884E1DFA39D0000E7E1F /* KAButton.swift in Sources */,
+				BAF7E6E01FE3658A005C841C /* FiltersViewModel.swift in Sources */,
 				BA8D4D1A1DA13EA4007CBE84 /* AboutViewController.swift in Sources */,
 				BA1D3E2A1DB84032001D2533 /* CoreDataController.swift in Sources */,
 				BAAE658C1DA93EC600DF116C /* SpeakerThinJSON.swift in Sources */,
@@ -476,6 +486,7 @@
 				BAE379E21FBF6653007B5B9D /* UIViewController+Utilities.swift in Sources */,
 				BAC338C91D8F0BAC00D368BF /* SessionsViewController.swift in Sources */,
 				BA8D4D241DA93953007CBE84 /* SessionsViewModel.swift in Sources */,
+				BAF7E6E21FE36C10005C841C /* FilterTableViewCell.swift in Sources */,
 				BA8D4D181DA13E92007CBE84 /* SpeakersVeiwController.swift in Sources */,
 				BA8D4D1C1DA14442007CBE84 /* CodeMashUtilities.swift in Sources */,
 				BA61A0CC1DBC386000E8FBB8 /* SpeakerWebViewController.swift in Sources */,
@@ -486,6 +497,7 @@
 				BAC338C71D8F0BAC00D368BF /* AppDelegate.swift in Sources */,
 				BA61A0CA1DBC0DFA00E8FBB8 /* BiographyTableViewCell.swift in Sources */,
 				BA1D3E2E1DB8610A001D2533 /* SessionObj.swift in Sources */,
+				BAF7E6DE1FE3635A005C841C /* FilterViewController.swift in Sources */,
 				BA14ED041DB2DEC300A6532C /* SpeakerJSON.swift in Sources */,
 				BA14ED061DB2E37F00A6532C /* SpeakersViewModel.swift in Sources */,
 				BA8D4D1E1DA9295A007CBE84 /* SessionDetailsViewController.swift in Sources */,

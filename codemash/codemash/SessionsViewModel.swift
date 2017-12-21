@@ -20,7 +20,11 @@ class SessionsViewModel {
     let prefs = UserDefaults.standard
     let favKey = "favoriteSessions"
     let updateKey = "serverUpdate"
-    var currentDay: Day = .Tuesday //default
+    var currentDay: Day = .Tuesday { //default
+        didSet {
+            self.refreshSessions()
+        }
+    }
     
     init(rest: RestController, coreData: CoreDataController) {
         self.rest = rest
@@ -37,7 +41,7 @@ class SessionsViewModel {
          }
     }
     
-    func loadSessionsForDay(day: Day) {
+    private func loadSessionsForDay(day: Day) {
         
         currentDay = day
         self.sessions = self.coreData.getSessionsForDay(day: (day.rawValue-1)) //start index at 0
@@ -48,6 +52,37 @@ class SessionsViewModel {
         if needToRefresh {
             requestSessions()
         }
+    }
+    
+    private func refreshSessions() {
+        //apply filter and day if it's changed.
+        self.sessions = self.coreData.getSessionsForDay(day: (currentDay.rawValue-1))
+        
+        let selectedFilters: [Int] = prefs.array(forKey: filterKey) as? [Int] ?? []
+        
+        var filteredSessions: [SessionObj] = []
+        if selectedFilters.count > 0 {
+            //if there are selected filters - go through the sessions and remvoe those who don't match
+            for session in self.sessions {
+                var sessionMatchesFilter = false
+                for filterIndex in selectedFilters {
+                    let filter = filters[filterIndex]
+                    print(filter+" : \(session.tags!)")
+                    sessionMatchesFilter = session.tags?.contains(filter) ?? false
+                    
+                    if sessionMatchesFilter {
+                        filteredSessions.append(session)
+                    }
+                }
+            }
+        } else {
+           filteredSessions = self.sessions
+        }
+        
+        self.sessions = filteredSessions
+        
+        //send notification to reload table
+        NotificationCenter.default.post(name: NotificationName.sessionsLoaded, object: nil)
     }
     
     func loadSessionsFromFile() {
@@ -71,6 +106,14 @@ class SessionsViewModel {
                 // handle error
             }
         }
+    }
+    
+    func getFilterButtonText() -> String {
+        let filterCount = prefs.array(forKey: filterKey)?.count ?? 0
+        if filterCount > 0 {
+            return "Filter (\(filterCount))"
+        }
+        return "Filter"        
     }
     
     func requestSessions() {

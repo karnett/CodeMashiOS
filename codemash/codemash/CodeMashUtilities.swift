@@ -12,7 +12,10 @@ import Foundation
 
 let prefs = UserDefaults.standard
 let favKey = "favoriteSessions"
+let filterKey = "filterSessions"
 let coreDataUtil = CoreDataController()
+
+let filters: [String] = [".NET", "Cloud/Big Data", "Design (UI/UX/CSS)", "Events", "Functional Programming", "Hardware", "Java", "JavaScript", "Mobile", "Other", "Ruby/Rails", "Security", "Soft Skills / Business", "Testing"]
 
 extension UIColor {
     public static func cmTeal() -> UIColor {
@@ -38,8 +41,6 @@ extension UIColor {
         return hexStringToUIColor(hex: "#333333")
     }
 }
-
-
 
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

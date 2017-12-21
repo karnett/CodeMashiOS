@@ -44,25 +44,18 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     var viewModel: SessionsViewModel!
     var selectedIndex: IndexPath?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         viewModel = SessionsViewModel(rest: restController, coreData: coreDataController)
         viewModel.checkForOldEntries()
-        viewModel.loadSessionsForDay(day: .Tuesday)
-        
         styleBtns()
-        selectedDay(day: Day.Tuesday)
+        selectedDay(day: viewModel.currentDay)
         
         let radius = self.scrollView.frame.size.height/2
 
         self.scrollView.layer.cornerRadius = radius
-        
         self.scrollView.contentInset = UIEdgeInsetsMake(0, radius, 0, radius)
-            
-            
         self.scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
         
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -73,22 +66,20 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
         self.tableView.estimatedRowHeight = 100.0
-
         
+        // Register to receive notification
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionsLoaded), name: NotificationName.sessionsLoaded, object: nil)       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         style()
         
-        // Register to receive notification
-        NotificationCenter.default.addObserver(self, selector: #selector(sessionsLoaded), name: NotificationName.sessionsLoaded, object: nil)
+        applyFilter()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        // Stop listening notification
+    deinit {
         NotificationCenter.default.removeObserver(self, name: NotificationName.sessionsLoaded, object: nil);
     }
     
@@ -107,6 +98,12 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.title = "Sessions"
         self.tabBarController?.tabBar.tintColor = UIColor.cmTeal()
         self.headerView.backgroundColor = UIColor.cmTeal()
+    }
+    
+    func applyFilter() {
+        self.filterBtn.setTitle(viewModel.getFilterButtonText(), for: UIControlState.normal)
+        viewModel.currentDay = viewModel.currentDay
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,7 +144,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                     roomString.append(", ")
                 }
             }
-            
             
             cell?.roomLabel.text = roomString
             cell?.timeLabel.text = getTimeFromString(startDate: session?.startTime, endDate: session?.endTime)
@@ -201,50 +197,48 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func daySelected(_ sender: UIButton) {
         let tag = sender.tag
-        selectedDay(day: Day.init(rawValue: tag)!)
+        let day = Day.init(rawValue: tag)!
+        viewModel.currentDay = day
+        selectedDay(day:day)
     }
     
     func selectedDay(day: Day){
         clearBtnBackgrounds()
         switch day {
             case .Tuesday:
-                
                 self.tuesdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.tuesdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Tuesday"
                 print("Tues")
                 
-                viewModel.loadSessionsForDay(day: .Tuesday)
+                viewModel.currentDay = .Tuesday
             
                 scrollTableToTop()
             case .Wednesday:
-                
                 self.wednesdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.wednesdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Wednesday"
                 print("Wed")
                 
-                viewModel.loadSessionsForDay(day: .Wednesday)
+                viewModel.currentDay = .Wednesday
                 
                 scrollTableToTop()
             case .Thursday:
-                
                 self.thursdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.thursdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Thursday"
                 print("Thurs")
                 
-                viewModel.loadSessionsForDay(day: .Thursday)
+                viewModel.currentDay = .Thursday
                 
                 scrollTableToTop()
             case .Friday:
-                
                 self.fridayBtn.layer.borderColor = UIColor.white.cgColor
                 self.fridayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Friday"
                 print("Friday")
                 
-                viewModel.loadSessionsForDay(day: .Friday)
+                viewModel.currentDay = .Friday
                 
                 scrollTableToTop()
         }
@@ -282,11 +276,9 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
     @IBAction func filterBtnPressed(_ sender: AnyObject) {
         print("Show Filters")
         performSegue(withIdentifier: "filterView", sender: self)
-        
     }
     
     func updateLoading(number: Int) {
@@ -307,4 +299,3 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 }
-
