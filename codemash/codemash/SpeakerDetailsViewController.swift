@@ -212,7 +212,6 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func favoriteBtnSelected(sender: UIButton) {
         let row = sender.tag
-        print("Favorited item at: \(row)")
         let session = self.sessions[row]
         if let id = session.sessionId {
             favoriteSession(id: Int(id), isFavorited: sender.isSelected)
@@ -259,8 +258,6 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func linkBtnPressed(_ sender: AnyObject) {
-        
-        print(sender.tag)
         switch (sender.tag) {
             case 0:
                 self.selectedURL = speaker?.githubUrl ?? ""

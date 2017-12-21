@@ -11,6 +11,5 @@ import Foundation
 struct NotificationName {
     static let sessionsLoaded = Notification.Name("SessionsLoaded")
     static let speakersLoaded = Notification.Name("SpeakersLoaded")
-    
     static let speakerSelected = Notification.Name("SpeakerSelected")
 }

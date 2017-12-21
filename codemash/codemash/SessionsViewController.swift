@@ -209,7 +209,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 self.tuesdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.tuesdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Tuesday"
-                print("Tues")
                 
                 viewModel.currentDay = .Tuesday
             
@@ -218,7 +217,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 self.wednesdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.wednesdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Wednesday"
-                print("Wed")
                 
                 viewModel.currentDay = .Wednesday
                 
@@ -227,7 +225,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 self.thursdayBtn.layer.borderColor = UIColor.white.cgColor
                 self.thursdayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Thursday"
-                print("Thurs")
                 
                 viewModel.currentDay = .Thursday
                 
@@ -236,7 +233,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 self.fridayBtn.layer.borderColor = UIColor.white.cgColor
                 self.fridayBtn.layer.borderWidth = 1.0
                 self.headerTitle = "Friday"
-                print("Friday")
                 
                 viewModel.currentDay = .Friday
                 
@@ -268,7 +264,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func favoriteBtnSelected(sender: UIButton) {
         let row = sender.tag
-        print("Favorited item at: \(row)")
         let session = viewModel.getSessionAtIndex(row: row)
         if let id = session?.sessionId {
             favoriteSession(id: Int(id), isFavorited: sender.isSelected)
@@ -277,7 +272,6 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func filterBtnPressed(_ sender: AnyObject) {
-        print("Show Filters")
         performSegue(withIdentifier: "filterView", sender: self)
     }
     

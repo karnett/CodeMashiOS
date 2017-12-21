@@ -25,9 +25,7 @@ class RestController {
             response in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
-            print(response.result)
             switch response.result {
-                
                 case .success(let data):
                     let sessions = Mapper<SessionJSON>().mapArray(JSONObject: data)
                     completionHandler(Result.success(sessions!))
@@ -44,9 +42,7 @@ class RestController {
             response in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
-            print(response.result)
             switch response.result {
-                
                 case .success(let data):
                     let sessions = Mapper<SpeakerJSON>().mapArray(JSONObject: data)
                     completionHandler(Result.success(sessions!))

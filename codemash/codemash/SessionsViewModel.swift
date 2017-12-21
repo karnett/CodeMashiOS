@@ -67,7 +67,6 @@ class SessionsViewModel {
                 var sessionMatchesFilter = false
                 for filterIndex in selectedFilters {
                     let filter = filters[filterIndex]
-                    print(filter+" : \(session.tags!)")
                     sessionMatchesFilter = session.tags?.contains(filter) ?? false
                     
                     if sessionMatchesFilter {

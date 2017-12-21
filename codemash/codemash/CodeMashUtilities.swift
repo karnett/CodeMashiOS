@@ -9,13 +9,25 @@
 import UIKit
 import Foundation
 
-
 let prefs = UserDefaults.standard
 let favKey = "favoriteSessions"
 let filterKey = "filterSessions"
 let coreDataUtil = CoreDataController()
 
-let filters: [String] = [".NET", "Cloud/Big Data", "Design (UI/UX/CSS)", "Events", "Functional Programming", "Hardware", "Java", "JavaScript", "Mobile", "Other", "Ruby/Rails", "Security", "Soft Skills / Business", "Testing"]
+let filters: [String] = [".NET",
+                         "Cloud/Big Data",
+                         "Design (UI/UX/CSS)",
+                         "Events",
+                         "Functional Programming",
+                         "Hardware",
+                         "Java",
+                         "JavaScript",
+                         "Mobile",
+                         "Other",
+                         "Ruby/Rails",
+                         "Security",
+                         "Soft Skills / Business",
+                         "Testing"]
 
 extension UIColor {
     public static func cmTeal() -> UIColor {
@@ -78,15 +90,12 @@ func getTimeFromString(startDate: String?, endDate: String?) -> String {
     if endDate == nil {
         dateForm.dateFormat = "hh:mm a"
         return "\n\(dateForm.string(from: start!))"
-        
     }
     
     let end = dateForm.date(from: endDate!)
     
     dateForm.dateFormat = "hh:mm a"
     return "\(dateForm.string(from: start!))\nto \(dateForm.string(from: end!))"
-    
-    // return (date.components(separatedBy: "T")[1] as? String)!
 }
 
 func getDayFromString(date: String?) -> String {
@@ -102,19 +111,17 @@ func getDayFromString(date: String?) -> String {
     
     dateForm.dateFormat = "EEEE"
     return "\(dateForm.string(from: start!)) "
-    
 }
 
 func favoriteSession(id: Int, isFavorited: Bool) {
     var favorites: [Int] = prefs.array(forKey: favKey) as? [Int] ?? []
     
     if !isFavorited {
-        
         favorites.append(id)
     } else {
         favorites = favorites.filter({ $0 != id })
     }
-    
+
     prefs.set(favorites, forKey: favKey)
 }
 
@@ -131,4 +138,3 @@ func isSessionFavorite(id: Int) -> Bool {
     }
     return false
 }
-

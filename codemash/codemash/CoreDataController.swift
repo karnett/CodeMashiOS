@@ -137,7 +137,6 @@ class CoreDataController {
             //save the object
             do {
                 try context.save()
-                print("saved!")
             } catch let error as NSError  {
                 print("Could not save \(error), \(error.userInfo)")
             }
@@ -175,9 +174,6 @@ class CoreDataController {
                 //save the object
                 
                 try context.save()
-                print("updated!")
-
-                
                 return true
             }
         } catch {
@@ -221,7 +217,6 @@ class CoreDataController {
             
             do {
                 try context.save()
-                print("speaker saved!")
             } catch let error as NSError  {
                 print("Could not save \(error), \(error.userInfo)")
             } catch {
@@ -252,13 +247,8 @@ class CoreDataController {
                 speaker.setValue(json.github, forKey: "githubUrl")
                 speaker.setValue(json.speakerId, forKey: "speakerId")
 
-                
                 //save the object
-                
                 try context.save()
-                print("speaker updated!")
-                
-                
                 return true
             }
         } catch {
