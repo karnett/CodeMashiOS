@@ -14,7 +14,6 @@ class SessionsViewModel {
     var coreData: CoreDataController!
     
     var sessions: [SessionObj] = []
-    
     var loadingSessions = false
     
     let prefs = UserDefaults.standard
@@ -41,22 +40,16 @@ class SessionsViewModel {
          }
     }
     
-    private func loadSessionsForDay(day: Day) {
-        
-        currentDay = day
-        self.sessions = self.coreData.getSessionsForDay(day: (day.rawValue-1)) //start index at 0
-        
-        let dateRefreshed = self.getLastUpdateFromServer()
-        let needToRefresh: Bool = (dateRefreshed == nil || numOfDays(first: dateRefreshed!, second: Date()) > 0)
-        
-        if needToRefresh {
-            requestSessions()
-        }
-    }
-    
     private func refreshSessions() {
         //apply filter and day if it's changed.
         self.sessions = self.coreData.getSessionsForDay(day: (currentDay.rawValue-1))
+
+        let dateRefreshed = self.getLastUpdateFromServer()
+        let needToRefresh: Bool = (dateRefreshed == nil || numOfDays(first: dateRefreshed!, second: Date()) > 0)
+
+        if needToRefresh {
+            requestSessions()
+        }
         
         let selectedFilters: [Int] = prefs.array(forKey: filterKey) as? [Int] ?? []
         
@@ -120,8 +113,6 @@ class SessionsViewModel {
         self.rest.loadSessions(completionHandler: { result in
             self.loadingSessions = false
             switch result {
-                
-                
             case .success(let data):
                 
                 for entry in data {
@@ -139,11 +130,9 @@ class SessionsViewModel {
                 //alert
                 print(error)
             }
-            
         })
     }
-    
-    
+
     func numberOfRowsInSection(section: Int) -> Int {
         return sessions.count
     }
@@ -156,7 +145,6 @@ class SessionsViewModel {
     }
     
     func getSpeakersForSessions(id: String) -> [SpeakerThinJSON] {
-        
         return self.coreData.getSpeakersForSession(id: id)
     }
     
@@ -168,8 +156,6 @@ class SessionsViewModel {
         let date2 = calendar.startOfDay(for: second)
         
         let components = calendar.dateComponents([.day], from: date1, to: date2)
-
-        
         return components.day ?? 5 //default needs to be more than 1
     }
     
@@ -184,6 +170,4 @@ class SessionsViewModel {
     func getLastUpdateFromServer() -> Date? {
         return prefs.object(forKey: updateKey) as? Date ?? nil
     }
-    
-        
 }

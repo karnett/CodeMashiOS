@@ -659,14 +659,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 2J5FHX4NA9;
 				INFOPLIST_FILE = codemash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karnett.codemash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a259d01a-cd62-42b9-a61c-1c7391912cf3";
-				PROVISIONING_PROFILE_SPECIFIER = codemashDev;
+				PROVISIONING_PROFILE = "44c5d754-1c36-4547-945a-728980586b7e";
+				PROVISIONING_PROFILE_SPECIFIER = codemashDist;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -684,6 +685,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karnett.codemash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "44c5d754-1c36-4547-945a-728980586b7e";
 				PROVISIONING_PROFILE_SPECIFIER = codemashDist;
 				SWIFT_VERSION = 3.0;
 			};

@@ -750,7 +750,7 @@
                                         </constraints>
                                     </scrollView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Not-O8-43t">
-                                        <rect key="frame" x="287" y="24" width="80" height="30"/>
+                                        <rect key="frame" x="287" y="36" width="80" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="N7B-18-ZQh"/>
                                             <constraint firstAttribute="width" constant="80" id="emI-et-kpm"/>
@@ -768,7 +768,7 @@
                                 <constraints>
                                     <constraint firstItem="Ccd-5x-f92" firstAttribute="centerY" secondItem="c3Q-OE-Yd3" secondAttribute="centerY" id="5cQ-0z-wmL"/>
                                     <constraint firstAttribute="trailing" secondItem="Ccd-5x-f92" secondAttribute="trailing" constant="8" id="Kd2-b2-L5O"/>
-                                    <constraint firstItem="Not-O8-43t" firstAttribute="top" secondItem="c3Q-OE-Yd3" secondAttribute="top" constant="24" id="RvW-Mt-dao"/>
+                                    <constraint firstItem="Not-O8-43t" firstAttribute="top" secondItem="c3Q-OE-Yd3" secondAttribute="topMargin" constant="8" id="RvW-Mt-dao"/>
                                     <constraint firstAttribute="height" constant="250" id="Wvb-Fw-o2n"/>
                                     <constraint firstItem="Ccd-5x-f92" firstAttribute="centerX" secondItem="c3Q-OE-Yd3" secondAttribute="centerX" id="ZKa-ue-cUw"/>
                                     <constraint firstAttribute="trailing" secondItem="Not-O8-43t" secondAttribute="trailing" constant="8" id="afh-5X-xNl"/>
