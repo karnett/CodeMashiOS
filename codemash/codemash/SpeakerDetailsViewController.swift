@@ -102,7 +102,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
      
     }
     
-    func selectSpeaker(notification: NSNotification) {
+    @objc func selectSpeaker(notification: NSNotification) {
         NotificationCenter.default.removeObserver(self, name: NotificationName.speakerSelected, object: nil)
         self.navigationController?.popToRootViewController(animated: false)
         
@@ -210,7 +210,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
         return cell!
     }
     
-    func favoriteBtnSelected(sender: UIButton) {
+    @objc func favoriteBtnSelected(sender: UIButton) {
         let row = sender.tag
         let session = self.sessions[row]
         if let id = session.sessionId {
@@ -225,7 +225,7 @@ class SpeakerDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
         return 100.0
     }

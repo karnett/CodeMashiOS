@@ -55,7 +55,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         let radius = self.scrollView.frame.size.height/2
 
         self.scrollView.layer.cornerRadius = radius
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, radius, 0, radius)
+        self.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: radius, bottom: 0, right: radius)
         self.scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
         
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -88,7 +88,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    func sessionsLoaded() {
+    @objc func sessionsLoaded() {
         self.tableView.reloadData()
     }
     
@@ -101,7 +101,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func applyFilter() {
-        self.filterBtn.setTitle(viewModel.getFilterButtonText(), for: UIControlState.normal)
+        self.filterBtn.setTitle(viewModel.getFilterButtonText(), for: UIControl.State.normal)
         viewModel.currentDay = viewModel.currentDay
         
     }
@@ -192,7 +192,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         return UITableViewAutomaticDimension
+         return UITableView.automaticDimension
     }
     
     @IBAction func daySelected(_ sender: UIButton) {
@@ -262,7 +262,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
         self.fridayBtn.layer.cornerRadius = 8.0
     }
     
-    func favoriteBtnSelected(sender: UIButton) {
+    @objc func favoriteBtnSelected(sender: UIButton) {
         let row = sender.tag
         let session = viewModel.getSessionAtIndex(row: row)
         if let id = session?.sessionId {

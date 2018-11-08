@@ -44,7 +44,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell!
     }
     
-    func checkChanged(_ sender: UISwitch) {
+    @objc func checkChanged(_ sender: UISwitch) {
         viewModel.updateFilterAtIndex(filterIndex: sender.tag, selected: sender.isOn)
     }
 }

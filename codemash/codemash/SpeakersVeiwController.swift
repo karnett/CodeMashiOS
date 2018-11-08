@@ -87,11 +87,11 @@ class SpeakersViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationItem.title = "Speakers"
     }
     
-    func speakersLoaded() {
+    @objc func speakersLoaded() {
         self.tableView.reloadData()
     }
     
-    func selectSpeaker(notification: NSNotification) {
+    @objc func selectSpeaker(notification: NSNotification) {
         
         //find matching speaker
         if let id = notification.object as? String, let index = self.viewModel.getIndexForSpeaker(id: id)
