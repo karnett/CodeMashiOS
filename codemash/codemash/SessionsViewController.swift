@@ -239,6 +239,7 @@ class SessionsViewController: UIViewController, UITableViewDelegate, UITableView
                 scrollTableToTop()
         }
         self.tableView.reloadData()
+        setSelectedDay(day: day)
     }
     
     func scrollTableToTop() {
