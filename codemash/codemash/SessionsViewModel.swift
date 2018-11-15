@@ -22,6 +22,7 @@ class SessionsViewModel {
     var currentDay: Day = getSelectedDay() { //returns selectedSessionDayKey, today, or default Tuesday
         didSet {
             self.refreshSessions()
+            setSelectedDay(day: currentDay) //sets the current day to the selected day on the UserDefaults
         }
     }
     

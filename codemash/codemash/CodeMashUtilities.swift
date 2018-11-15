@@ -164,9 +164,8 @@ func getAdjustedDow(dow: Int) -> Int{
 func getDayFromInt(dowInt: Int) -> Day {
     if let day = Day(rawValue: dowInt) {
         return day
-    }else{
-        return Day.Tuesday
     }
+        return Day.Tuesday
 }
 
 func getSessionWithId(id: String) -> SessionObj? {
