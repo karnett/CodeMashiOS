@@ -19,7 +19,7 @@ class SessionsViewModel {
     let prefs = UserDefaults.standard
     let favKey = "favoriteSessions"
     let updateKey = "serverUpdate"
-    var currentDay: Day = getSelectedDay() { //returns selectedSessionDayKey, today, or default Tuesday
+    var currentDay: Day = .Tuesday { //default
         didSet {
             self.refreshSessions()
         }
