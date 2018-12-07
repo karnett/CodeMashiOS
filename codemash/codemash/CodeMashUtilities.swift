@@ -12,6 +12,7 @@ import Foundation
 let prefs = UserDefaults.standard
 let favKey = "favoriteSessions"
 let filterKey = "filterSessions"
+let selectedSessionDayKey = "selectedSessionDay"
 let coreDataUtil = CoreDataController()
 
 let filters: [String] = [".NET",
@@ -121,8 +122,50 @@ func favoriteSession(id: Int, isFavorited: Bool) {
     } else {
         favorites = favorites.filter({ $0 != id })
     }
-
+    
     prefs.set(favorites, forKey: favKey)
+}
+
+func setSelectedDay(day: Day) {
+    prefs.set(day.rawValue, forKey: selectedSessionDayKey)
+}
+
+func getSelectedDay() -> Day {
+    //if saved day is less than today's date go to today
+    let savedDow = getDayFromInt(dowInt: prefs.integer(forKey: selectedSessionDayKey))
+    let currentDow: Int = getAdjustedDow(dow: getCurrentDayOfWeek())
+    let currentDowAdjusted: Day = getDayFromInt(dowInt: currentDow)
+    
+    if(savedDow.rawValue < currentDow){
+        return currentDowAdjusted
+    }else{
+        return savedDow
+    }
+}
+
+func getCurrentDayOfWeek() -> Int {
+    let dateForm = DateFormatter()
+    dateForm.dateFormat = "e"
+    if let dow = Int(dateForm.string(from: Date())) {
+        return dow
+    }else{
+        return 1
+    }
+}
+
+func getAdjustedDow(dow: Int) -> Int{
+    if dow >= 3{
+        return dow - 2
+    }else{
+        return 1
+    }
+}
+
+func getDayFromInt(dowInt: Int) -> Day {
+    if let day = Day(rawValue: dowInt) {
+        return day
+    }
+        return Day.Tuesday
 }
 
 func getSessionWithId(id: String) -> SessionObj? {
